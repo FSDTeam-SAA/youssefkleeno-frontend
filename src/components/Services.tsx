@@ -2,7 +2,7 @@ import React from 'react'
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 
-import { CheckCircle,  Droplets,  Calendar, Zap } from "lucide-react"
+import { CheckCircle,  Droplets,  Calendar, Zap, Car } from "lucide-react"
 import { Button } from './ui/button'
 const Services = () => {
   return (
@@ -71,13 +71,13 @@ const Services = () => {
               <CardHeader className="text-left pb-6">
                 <div className="flex items-center space-x-4 mb-4">
                   <div
-                    className="w-16 h-16 rounded-2xl flex items-center justify-center"
+                    className="w-20 h-14 rounded-lg flex items-center justify-center"
                     style={{ backgroundColor: "#499FC0" }}
                   >
-                    <Droplets className="w-8 h-8 text-white" />
+                    <Car className="w-10 h-10 text-white" />
                   </div>
                   <div>
-                    <CardTitle className="text-2xl font-bold">One-time Wash</CardTitle>
+                    <CardTitle className="text-xl font-semibold">One-time Wash</CardTitle>
                     <CardDescription className="text-base mt-1">
                       Perfect for when you need a quick clean without commitment. Available for all vehicle types.
                     </CardDescription>
