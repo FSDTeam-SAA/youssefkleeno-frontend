@@ -8,38 +8,7 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-background">
 
-      {/* Hero Section */}
-      <section className="relative min-h-[80vh] flex items-center justify-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{
-            backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Home.png-Ks5EVFL6vViweF3PuibQ5BVGkCWF2z.jpeg')`,
-          }}
-        />
-
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 text-balance">
-            Sparkling Clean Cars, <span className="text-blue-400">Delivered To You</span>
-          </h1>
-          <p className="text-lg sm:text-xl lg:text-2xl mb-8 max-w-3xl mx-auto text-pretty opacity-90">
-            Experience the convenience of professional car washing services at your doorstep. Choose between our monthly
-            or weekly subscription plans.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Button size="lg" className="bg-blue-500 hover:bg-blue-600 text-white px-8 py-3 text-lg w-full sm:w-auto">
-              Book Now
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="border-white text-white hover:bg-white hover:text-gray-900 px-8 py-3 text-lg w-full sm:w-auto bg-transparent"
-            >
-              Call Now: (555) 123-4567
-            </Button>
-          </div>
-        </div>
-      </section>
+   
 
       {/* Services Section */}
       <section id="services" className="py-16 lg:py-24 bg-gray-50">
