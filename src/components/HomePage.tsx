@@ -16,17 +16,19 @@ export default function HomePage() {
       <section className="py-16 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Our Wash Type</h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-semibold  text-gray-900 mb-4">Our Wash Type</h2>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {/* Dry Wash */}
             <Card className="text-center">
               <CardHeader>
-                <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+               <div className="flex justify-start items-center bg-red-600">
+                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   <Wind className="w-8 h-8 text-green-500" />
                 </div>
                 <CardTitle className="text-xl">Dry Wash</CardTitle>
+               </div>
               </CardHeader>
               <CardContent>
                 <p className="text-gray-600 mb-4">Eco-friendly wash without using water</p>
