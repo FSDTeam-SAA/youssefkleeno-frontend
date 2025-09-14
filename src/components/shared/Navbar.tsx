@@ -2,6 +2,7 @@
 "use client"
 import { Button } from "@/components/ui/button"
 import { Car, Menu,X} from "lucide-react"
+import Image from "next/image"
 import React, { use, useState } from 'react'
 
 const Navbar = () => {
@@ -9,15 +10,19 @@ const Navbar = () => {
   return (
     <div>
            {/* Navigation */}
-  <nav className="bg-white/95 backdrop-blur-sm border-b sticky top-0 z-50">
+  <nav className="bg-white/95 py-3 backdrop-blur-sm border-b sticky top-0 z-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-2">
-              <div
-                className=" rounded-full flex items-center justify-center"
-              >
-                <Car className="w-12 h-12 text-black" />
-              </div>
+           <div className="flex items-center space-x-2 mb-4">
+                       {/* <div
+                       className=" rounded-full flex items-center justify-center"
+                     >
+                       <Car className="w-12 h-12 text-black" />
+                     </div> */}
+                     <Image src="/navlogo.png" alt="logo" width={80} height={80} className=''/>
+               
+                     </div> 
             </div>
 
             <div className="hidden md:flex items-center justify-center flex-1">
