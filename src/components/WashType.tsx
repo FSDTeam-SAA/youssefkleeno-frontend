@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card, CardContent,  CardHeader, CardTitle } from "@/components/ui/card"
-import {   Droplets, Leaf,  Zap } from 'lucide-react'
+import {   Droplet, Leaf,  Zap } from 'lucide-react'
 import { Badge } from "@/components/ui/badge"
 const WashType = () => {
   return (
@@ -35,7 +35,7 @@ const WashType = () => {
               <CardHeader className="pb-4">
                 <div className="flex items-center space-x-4 mb-3">
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
-                    <Droplets className="w-8 h-8 text-blue-600" />
+                    <Droplet className="w-8 h-8 text-blue-600" />
                   </div>
                   <CardTitle className="text-xl font-bold">Water Wash</CardTitle>
                 </div>

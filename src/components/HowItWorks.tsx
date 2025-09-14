@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Calendar, CheckCircle, Droplets } from 'lucide-react'
+import { Calendar, Car, CheckCircle, CreditCard, Droplet, Droplets, MapPin } from 'lucide-react'
 
 const HowItWorks = () => {
   return (
@@ -11,22 +11,22 @@ const HowItWorks = () => {
       <section id="how-it-works" className="py-16 lg:py-24 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">How It Works</h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-semibold text-gray-900 mb-4">How It Works</h2>
             <p className="text-lg text-gray-600 text-balance">Getting your car washed has never been easier</p>
           </div>
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
             {/* Step 1 */}
-            <Card className="text-left border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white">
+            <Card className="text-left border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white">
               <CardHeader className="pb-4">
                 <div className="flex items-center space-x-4 mb-3">
                   <div
-                    className="w-16 h-16 text-white rounded-2xl flex items-center justify-center text-xl font-bold shadow-lg"
+                    className="w-14 h-14 text-white rounded-md flex items-center justify-center text-xl font-semibold "
                     style={{ backgroundColor: "#499FC0" }}
                   >
-                    <Droplets className="w-8 h-8" />
+                    <Car className="w-8 h-8" />
                   </div>
-                  <CardTitle className="text-xl font-bold">Choose Your Service</CardTitle>
+                  <CardTitle className="text-xl font-semibold">Choose Your Service</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
@@ -37,16 +37,16 @@ const HowItWorks = () => {
             </Card>
 
             {/* Step 2 */}
-            <Card className="text-left border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white">
+            <Card className="text-left border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white">
               <CardHeader className="pb-4">
                 <div className="flex items-center space-x-4 mb-3">
                   <div
-                    className="w-16 h-16 text-white rounded-2xl flex items-center justify-center text-xl font-bold shadow-lg"
+                    className="w-14 h-14 text-white rounded-md flex items-center justify-center text-xl font-semibold "
                     style={{ backgroundColor: "#499FC0" }}
                   >
-                    <Droplets className="w-8 h-8" />
+                    <Droplet className="w-8 h-8" />
                   </div>
-                  <CardTitle className="text-xl font-bold">Select Vehicle & Wash Type</CardTitle>
+                  <CardTitle className="text-xl font-semibold">Select Vehicle & Wash Type</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
@@ -55,16 +55,16 @@ const HowItWorks = () => {
             </Card>
 
             {/* Step 3 */}
-            <Card className="text-left border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white sm:col-span-2 lg:col-span-1">
+            <Card className="text-left border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white sm:col-span-2 lg:col-span-1">
               <CardHeader className="pb-4">
                 <div className="flex items-center space-x-4 mb-3">
                   <div
-                    className="w-16 h-16 text-white rounded-2xl flex items-center justify-center text-xl font-bold shadow-lg"
+                    className="w-14 h-14 text-white rounded-md flex items-center justify-center text-xl font-semibold "
                     style={{ backgroundColor: "#499FC0" }}
                   >
-                    <CheckCircle className="w-8 h-8" />
+                    <MapPin className="w-8 h-8" />
                   </div>
-                  <CardTitle className="text-xl font-bold">Set Location</CardTitle>
+                  <CardTitle className="text-xl font-semibold">Set Location</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
@@ -73,16 +73,16 @@ const HowItWorks = () => {
             </Card>
 
             {/* Step 4 */}
-            <Card className="text-left border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white">
+            <Card className="text-left border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white">
               <CardHeader className="pb-4">
                 <div className="flex items-center space-x-4 mb-3">
                   <div
-                    className="w-16 h-16 text-white rounded-2xl flex items-center justify-center text-xl font-bold shadow-lg"
+                    className="w-14 h-14 text-white rounded-md flex items-center justify-center text-xl font-semibold "
                     style={{ backgroundColor: "#499FC0" }}
                   >
                     <Calendar className="w-8 h-8" />
                   </div>
-                  <CardTitle className="text-xl font-bold">Schedule</CardTitle>
+                  <CardTitle className="text-xl font-semibold">Schedule</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
@@ -91,16 +91,16 @@ const HowItWorks = () => {
             </Card>
 
             {/* Step 5 */}
-            <Card className="text-left border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white">
+            <Card className="text-left border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white">
               <CardHeader className="pb-4">
                 <div className="flex items-center space-x-4 mb-3">
                   <div
-                    className="w-16 h-16 text-white rounded-2xl flex items-center justify-center text-xl font-bold shadow-lg"
+                    className="w-14 h-14 text-white rounded-md flex items-center justify-center text-xl font-semibold "
                     style={{ backgroundColor: "#499FC0" }}
                   >
-                    <CheckCircle className="w-8 h-8" />
+                   <CreditCard className="w-8 h-8" />
                   </div>
-                  <CardTitle className="text-xl font-bold">Payment</CardTitle>
+                  <CardTitle className="text-xl font-semibold">Payment</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
@@ -109,16 +109,16 @@ const HowItWorks = () => {
             </Card>
 
             {/* Step 6 */}
-            <Card className="text-left border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white">
+            <Card className="text-left border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white">
               <CardHeader className="pb-4">
                 <div className="flex items-center space-x-4 mb-3">
                   <div
-                    className="w-16 h-16 text-white rounded-2xl flex items-center justify-center text-xl font-bold shadow-lg"
+                    className="w-14 h-14 text-white rounded-md flex items-center justify-center text-xl font-semibold "
                     style={{ backgroundColor: "#499FC0" }}
                   >
                     <CheckCircle className="w-8 h-8" />
                   </div>
-                  <CardTitle className="text-xl font-bold">Confirmation</CardTitle>
+                  <CardTitle className="text-xl font-semibold">Confirmation</CardTitle>
                 </div>
               </CardHeader>
               <CardContent>
