@@ -12,68 +12,7 @@ export default function HomePage() {
 
   
 
-      {/* Wash Types Section */}
-      <section className="py-16 lg:py-24">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-semibold  text-gray-900 mb-4">Our Wash Type</h2>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {/* Dry Wash */}
-            <Card className="text-center">
-              <CardHeader>
-               <div className="flex justify-start items-center bg-red-600">
-                 <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Wind className="w-8 h-8 text-green-500" />
-                </div>
-                <CardTitle className="text-xl">Dry Wash</CardTitle>
-               </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 mb-4">Eco-friendly wash without using water</p>
-                <Badge variant="secondary" className="bg-green-100 text-green-700">
-                  Best Choice
-                </Badge>
-              </CardContent>
-            </Card>
-
-            {/* Water Wash */}
-            <Card className="text-center">
-              <CardHeader>
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Droplets className="w-8 h-8 text-blue-500" />
-                </div>
-                <CardTitle className="text-xl">Water Wash</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 mb-4">Water Wash</p>
-                <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
-                  <p className="text-sm text-yellow-800">
-                    Water wash is not available during winter season due to freezing temperatures
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Steam Wash */}
-            <Card className="text-center sm:col-span-2 lg:col-span-1">
-              <CardHeader>
-                <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Zap className="w-8 h-8 text-orange-500" />
-                </div>
-                <CardTitle className="text-xl">Steam Wash</CardTitle>
-              </CardHeader>
-              <CardContent>
-                <p className="text-gray-600 mb-4">Deep cleaning with steam technology</p>
-                <div className="bg-orange-50 border border-orange-200 rounded-lg p-3">
-                  <p className="text-sm text-orange-800">Steam wash provides the deepest clean and sanitization</p>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
+  
 
       {/* How It Works Section */}
       <section id="how-it-works" className="py-16 lg:py-24 bg-gray-50">
