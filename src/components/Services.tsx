@@ -12,7 +12,7 @@ const Services = () => {
       <section id="services" className="py-16 lg:py-24 bg-gray-50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">Our Services</h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-semibold text-gray-900 mb-4">Our Services</h2>
             <p className="text-lg text-gray-600 max-w-2xl mx-auto text-balance">
               Choose between a one-time wash or subscribe for regular cleaning
             </p>
@@ -40,20 +40,20 @@ const Services = () => {
               <CardContent className="space-y-6">
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                      <Calendar className="w-4 h-4 text-blue-600" />
+                    <div className="w-6 h-6 rounded-full   flex items-center justify-center flex-shrink-0">
+                      <Calendar className="w-4 h-4 text-[#499FC0]" />
                     </div>
                     <span className="text-gray-700">Only $29/month for 4 washes</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                      <Calendar className="w-4 h-4 text-blue-600" />
+                    <div className="w-6 h-6 rounded-full   flex items-center justify-center flex-shrink-0">
+                      <Calendar className="w-4 h-4  text-[#499FC0]" />
                     </div>
                     <span className="text-gray-700">Flexible scheduling, change dates anytime</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                      <Zap className="w-4 h-4 text-blue-600" />
+                    <div className="w-6 h-6 rounded-full   flex items-center justify-center flex-shrink-0">
+                      <Zap className="w-4 h-4  text-[#499FC0]" />
                     </div>
                     <span className="text-gray-700">1 deep cleaning session</span>
                   </div>
@@ -87,20 +87,20 @@ const Services = () => {
               <CardContent className="space-y-6">
                 <div className="space-y-4">
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                      <Droplets className="w-4 h-4 text-blue-600" />
+                    <div className="w-6 h-6 rounded-full   flex items-center justify-center flex-shrink-0">
+                      <Droplets className="w-4 h-4  text-[#499FC0]" />
                     </div>
                     <span className="text-gray-700">Choose between eco-friendly dry wash or water wash</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                      <CheckCircle className="w-4 h-4 text-blue-600" />
+                    <div className="w-6 h-6 rounded-full   flex items-center justify-center flex-shrink-0">
+                      <CheckCircle className="w-4 h-4  text-[#499FC0]" />
                     </div>
                     <span className="text-gray-700">We come to your location</span>
                   </div>
                   <div className="flex items-center space-x-3">
-                    <div className="w-6 h-6 rounded-full bg-blue-100 flex items-center justify-center flex-shrink-0">
-                      <Calendar className="w-4 h-4 text-blue-600" />
+                    <div className="w-6 h-6 rounded-full   flex items-center justify-center flex-shrink-0">
+                      <Calendar className="w-4 h-4  text-[#499FC0]" />
                     </div>
                     <span className="text-gray-700">Schedule at your convenience</span>
                   </div>
