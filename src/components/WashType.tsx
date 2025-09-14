@@ -1,7 +1,7 @@
 import React from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge, Calendar, CheckCircle, Droplets, Wind, Zap } from 'lucide-react'
-import { Button } from './ui/button'
+import { Card, CardContent,  CardHeader, CardTitle } from "@/components/ui/card"
+import {   Droplets, Leaf,  Zap } from 'lucide-react'
+import { Badge } from "@/components/ui/badge"
 const WashType = () => {
   return (
     <div>
@@ -17,15 +17,16 @@ const WashType = () => {
             <Card className="text-left border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <CardHeader className="pb-4">
                 <div className="flex items-center space-x-4 mb-3">
-                  <div className="w-16 h-16 bg-green-100 rounded-2xl flex items-center justify-center">
-                    <Wind className="w-8 h-8 text-green-600" />
+                  <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
+                    <Leaf className="w-8 h-8 text-green-600" />
                   </div>
                   <CardTitle className="text-xl font-bold">Dry Wash</CardTitle>
                 </div>
                 <p className="text-gray-600">Eco-friendly wash without using water</p>
               </CardHeader>
               <CardContent>
-                <Badge className="bg-green-100 text-green-700 hover:bg-green-100 font-medium">Eco-friendly</Badge>
+                <Badge  className="h-5 bg-[#039A0633] text-[#039A06] text-md  min-w-5 rounded-full px-4 py-4 font-mono tabular-nums shadow-none"
+          variant="destructive">Eco-friendly</Badge> 
               </CardContent>
             </Card>
 
@@ -33,7 +34,7 @@ const WashType = () => {
             <Card className="text-left border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <CardHeader className="pb-4">
                 <div className="flex items-center space-x-4 mb-3">
-                  <div className="w-16 h-16 bg-blue-100 rounded-2xl flex items-center justify-center">
+                  <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
                     <Droplets className="w-8 h-8 text-blue-600" />
                   </div>
                   <CardTitle className="text-xl font-bold">Water Wash</CardTitle>
@@ -54,7 +55,7 @@ const WashType = () => {
             <Card className="text-left border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 sm:col-span-2 lg:col-span-1">
               <CardHeader className="pb-4">
                 <div className="flex items-center space-x-4 mb-3">
-                  <div className="w-16 h-16 bg-orange-100 rounded-2xl flex items-center justify-center">
+                  <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center">
                     <Zap className="w-8 h-8 text-orange-600" />
                   </div>
                   <CardTitle className="text-xl font-bold">Steam Wash</CardTitle>
