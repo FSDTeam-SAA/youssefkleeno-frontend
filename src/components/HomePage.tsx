@@ -1,8 +1,7 @@
 import { Button } from "@/components/ui/button"
-import { Card, CardContent,  CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
+import { Card, CardContent} from "@/components/ui/card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Star, CheckCircle, Smartphone, Droplets, Wind, Zap, Calendar } from "lucide-react"
+import { Star, CheckCircle, Smartphone,  } from "lucide-react"
 
 export default function HomePage() {
   return (
@@ -14,72 +13,7 @@ export default function HomePage() {
 
   
 
-      {/* How It Works Section */}
-      <section id="how-it-works" className="py-16 lg:py-24 bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">How It Works</h2>
-            <p className="text-lg text-gray-600">Getting your car washed has never been easier</p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Step 1 */}
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">
-                1
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Choose Your Service</h3>
-              <p className="text-gray-600">Select between one-time wash or monthly subscription based on your needs</p>
-            </div>
-
-            {/* Step 2 */}
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">
-                2
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Select Vehicle & Wash Type</h3>
-              <p className="text-gray-600">Choose your vehicle type and preferred washing method</p>
-            </div>
-
-            {/* Step 3 */}
-            <div className="text-center sm:col-span-2 lg:col-span-1">
-              <div className="w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">
-                3
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Set Location</h3>
-              <p className="text-gray-600">Pin your location on the map or enter address manually</p>
-            </div>
-
-            {/* Step 4 */}
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">
-                4
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Schedule</h3>
-              <p className="text-gray-600">Pick a convenient date and time for your wash</p>
-            </div>
-
-            {/* Step 5 */}
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">
-                5
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Payment</h3>
-              <p className="text-gray-600">Secure payment through our app or website</p>
-            </div>
-
-            {/* Step 6 */}
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-500 text-white rounded-full flex items-center justify-center mx-auto mb-4 text-xl font-bold">
-                6
-              </div>
-              <h3 className="text-xl font-semibold mb-2">Confirmation</h3>
-              <p className="text-gray-600">Receive confirmation and track your service</p>
-            </div>
-          </div>
-        </div>
-      </section>
-
+ 
       {/* Mobile App Section */}
       <section className="py-16 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
