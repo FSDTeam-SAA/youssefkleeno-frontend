@@ -136,7 +136,7 @@ export default function HomePage() {
               <AccordionItem value="item-4" className="bg-white rounded-lg px-6">
                 <AccordionTrigger className="text-left">Do I need to be present during the car wash?</AccordionTrigger>
                 <AccordionContent className="text-gray-600">
-                  While it's not required, we recommend being present or having someone available to provide access to
+                  While it&apos;s not required, we recommend being present or having someone available to provide access to
                   your vehicle and answer any questions our team might have.
                 </AccordionContent>
               </AccordionItem>
@@ -153,7 +153,7 @@ export default function HomePage() {
                 <AccordionTrigger className="text-left">Is the service available in all areas?</AccordionTrigger>
                 <AccordionContent className="text-gray-600">
                   We currently serve most metropolitan areas. Check our app or website to see if we service your
-                  location. We're constantly expanding our coverage area.
+                  location. We&apos;re constantly expanding our coverage area.
                 </AccordionContent>
               </AccordionItem>
             </Accordion>
@@ -172,7 +172,7 @@ export default function HomePage() {
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">What Our Customers Say</h2>
             <p className="text-lg text-gray-600">
-              Don't just take our word for it - read what satisfied customers have to say
+              Don&apos;t just take our word for it - read what satisfied customers have to say
             </p>
           </div>
 
@@ -186,8 +186,8 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="text-gray-600 mb-4">
-                  "I love the convenience of having my car washed at my office. The team is professional and my car
-                  always looks amazing!"
+                  &apos;I love the convenience of having my car washed at my office. The team is professional and my car
+                  always looks amazing!&apos;
                 </p>
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">
@@ -210,7 +210,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="text-gray-600 mb-4">
-                  "The monthly subscription is perfect for my busy lifestyle. Great service and competitive pricing!"
+                  &apos;The monthly subscription is perfect for my busy lifestyle. Great service and competitive pricing!&apos;
                 </p>
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-semibold">
@@ -233,7 +233,7 @@ export default function HomePage() {
                   ))}
                 </div>
                 <p className="text-gray-600 mb-4">
-                  "Eco-friendly dry wash is amazing! My car looks great and I feel good about helping the environment."
+                  &apos;Eco-friendly dry wash is amazing! My car looks great and I feel good about helping the environment.&apos;
                 </p>
                 <div className="flex items-center space-x-3">
                   <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white font-semibold">

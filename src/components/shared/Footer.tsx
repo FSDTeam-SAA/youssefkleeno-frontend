@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button } from '../ui/button'
-import { Car } from 'lucide-react'
 import Image from 'next/image'
 
 const Footer = () => {

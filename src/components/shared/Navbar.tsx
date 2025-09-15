@@ -1,9 +1,9 @@
 
 "use client"
 import { Button } from "@/components/ui/button"
-import { Car, Menu,X} from "lucide-react"
+import {  Menu,X} from "lucide-react"
 import Image from "next/image"
-import React, { use, useState } from 'react'
+import React, {  useState } from 'react'
 
 const Navbar = () => {
       const [mobileMenuOpen, setMobileMenuOpen] = useState(false)

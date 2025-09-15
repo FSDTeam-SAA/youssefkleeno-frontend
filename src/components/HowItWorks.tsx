@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Calendar, Car, CheckCircle, CreditCard, Droplet, Droplets, MapPin } from 'lucide-react'
+import { Card, CardContent,  CardHeader, CardTitle } from "@/components/ui/card"
+import { Calendar, Car, CheckCircle, CreditCard, Droplet, MapPin } from 'lucide-react'
 
 const HowItWorks = () => {
   return (

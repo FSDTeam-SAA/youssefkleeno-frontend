@@ -44,7 +44,7 @@ const WashType = () => {
               <CardContent>
                 <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
                   <p className="text-sm text-yellow-800 font-medium">
-                    <strong>Note:</strong> Only available if your location permits water usage. We'll confirm this after
+                    <strong>Note:</strong> Only available if your location permits water usage. We&apos;ll confirm this after
                     you select your location.
                   </p>
                 </div>
