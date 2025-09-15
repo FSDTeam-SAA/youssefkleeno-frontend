@@ -12,8 +12,11 @@ const montserrat = Montserrat({
 
 
 export const metadata: Metadata = {
-  title: "Future University in Egypt",
-  description: "Official Future University in Egypt website",
+  title: "Car Wash",
+  description: "Car Wash",
+  icons: {
+    icon: "/navlogo.png",
+  }
 };
 
 
