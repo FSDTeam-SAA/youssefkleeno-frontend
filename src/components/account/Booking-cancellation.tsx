@@ -6,7 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 
-import { AlertTriangle, X } from "lucide-react"
+import { AlertTriangle, Calendar, Car, MapPin, X } from "lucide-react"
 import {
   Dialog,
   DialogContent,
@@ -43,67 +43,78 @@ export function BookingCancellation({ bookingId, onBack }: BookingCancellationPr
   return (
     <>
       <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-6">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center">
-              <X className="h-5 w-5 text-red-600" />
+        <CardHeader className="  space-y-0 pb-6 flex ">
+      
+            <div className=" text-center">
+            <div className="flex justify-center">
+              <div className="w-10 h-10  rounded-full flex items-center justify-center border-4 border-[#EF4444]">
+              <X className="h-5 w-5 text-[#EF4444]" />
+            </div>
             </div>
             <div>
-              <CardTitle className="text-xl font-semibold">Cancel Your Booking</CardTitle>
-              <p className="text-gray-600 mt-1">
-                Are you absolutely sure you want to cancel this booking? This action cannot be undone.
+              <CardTitle className="text-2xl font-semibold text-[#2F2F2F] mt-6">Cancel Your Booking </CardTitle>
+              <p className="text-base text-[#707070] font-normal mt-3">
+                Are you sure you want to cancel your car wash booking?
               </p>
             </div>
           </div>
+   
         </CardHeader>
 
-        <CardContent className="space-y-6">
+        <CardContent className="space-y-6 mt-10">
           {/* Booking Details */}
-          <div className="bg-gray-50 rounded-lg p-4">
-            <h3 className="font-medium text-gray-900 mb-3">Booking Details</h3>
-            <div className="space-y-2 text-sm">
+          <div className="bg-gray-20 rounded-lg p-4 border">
+            <h3 className="text-xl font-medium text-[#2F2F2F] mb-3">Booking Details</h3>
+            <div className="space-y-2 text-[18px] text-[#2F2F2F] font-medium">
               <div className="flex justify-between">
-                <span className="text-gray-600">Water Wash</span>
+                <span className="text-[#6B6B6B] text-sm font-normal">Water Wash</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-gray-600">📅 Wash # 1 02/06/2025</span>
+                 <Calendar className="h-5 w-5 text-gray-600" />
+                <span className="text-gray-600"> Wash # 1 02/06/2025</span>
               </div>
               <div className="flex items-center gap-2 text-gray-600">
-                <span>9:00 AM-10:00 AM</span>
+                <span className="text-sm text-[#6B6B6B] text-normal">9:00 AM-10:00 AM</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-gray-600">📅 Wash # 1 02/06/2025</span>
+                 <Calendar className="h-5 w-5 text-gray-600" />
+                <span className="text-gray-600"> Wash # 1 02/06/2025</span>
               </div>
               <div className="flex items-center gap-2 text-gray-600">
-                <span>9:00 AM-10:00 AM</span>
+                <span className="text-sm text-[#6B6B6B] text-normal">9:00 AM-10:00 AM</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-gray-600">📅 Wash # 1 02/06/2025</span>
+                 <Calendar className="h-5 w-5 text-gray-600" />
+                <span className="text-gray-600"> Wash # 1 02/06/2025</span>
               </div>
               <div className="flex items-center gap-2 text-gray-600">
-                <span>9:00 AM-10:00 AM</span>
+                <span className="text-sm text-[#6B6B6B] text-normal">9:00 AM-10:00 AM</span>
               </div>
               <div className="flex items-center gap-2">
-                <span className="text-gray-600">📅 Wash # 1 02/06/2025</span>
+                 <Calendar className="h-5 w-5 text-gray-600" />
+                <span className="text-gray-600"> Wash # 1 02/06/2025</span>
               </div>
               <div className="flex items-center gap-2 text-gray-600">
-                <span>9:00 AM-10:00 AM</span>
+                <span className="text-sm text-[#6B6B6B] text-normal">9:00 AM-10:00 AM</span>
               </div>
               <div className="flex items-center gap-2 mt-3">
-                <span className="text-gray-600">📍 Location</span>
+                  <MapPin className="h-5 w-5 text-gray-600" />
+                <span className="text-gray-600">Location</span>
               </div>
-              <div className="text-gray-600 ml-6">Home 123 Main St</div>
+              <div className="text-sm text-gray-600 ml-6">Home 123 Main St</div>
               <div className="flex items-center gap-2 mt-2">
-                <span className="text-gray-600">🚗 Vehicle</span>
+                   <Car className="h-5 w-5 text-gray-600" />
+                <span className="text-gray-600"> Vehicle</span>
               </div>
-              <div className="text-gray-600 ml-6">Car</div>
+              <div className="text-sm text-gray-600 ml-6">Car</div>
             </div>
           </div>
 
           {/* Cancellation Policy */}
-          <div>
-            <h3 className="font-medium text-gray-900 mb-3">Cancellation Policy</h3>
-            <div className="text-sm text-gray-600 space-y-2">
+          <div className="border  p-4 rounded-lg mt-10">
+          <div >
+            <h3 className="text-xl  font-medium text-[#2F2F2F] mb-3">Cancellation Policy</h3>
+            <div className="text-base text-[#6B6B6B] space-y-2">
               <p>Our cancellation policy is as follows:</p>
               <ul className="list-disc list-inside space-y-1 ml-4">
                 <li>More than 24 hours before: Full refund</li>
@@ -116,7 +127,7 @@ export function BookingCancellation({ bookingId, onBack }: BookingCancellationPr
           </div>
 
           {/* Refund Breakdown */}
-          <div className="border-t pt-4">
+          <div className="border-t mt-4 pt-4">
             <div className="space-y-3">
               <div className="flex justify-between">
                 <span className="text-gray-600">Original Amount</span>
@@ -133,9 +144,11 @@ export function BookingCancellation({ bookingId, onBack }: BookingCancellationPr
             </div>
           </div>
 
+          </div>
+
           {/* Reason for Cancellation */}
           <div className="space-y-2">
-            <Label htmlFor="reason" className="text-sm font-medium">
+            <Label htmlFor="reason" className="text-xl text-[#2F2F2F] font-medium">
               Reason for Cancellation
             </Label>
             <Textarea
@@ -143,16 +156,16 @@ export function BookingCancellation({ bookingId, onBack }: BookingCancellationPr
               placeholder="Please tell us why you are cancelling..."
               value={reason}
               onChange={(e) => setReason(e.target.value)}
-              className="min-h-[100px]"
+              className="min-h-[250px]"
             />
           </div>
 
           {/* Action Buttons */}
           <div className="flex gap-3 pt-4">
-            <Button variant="outline" onClick={onBack} className="flex-1 bg-transparent">
+            <Button variant="outline" onClick={onBack} className="flex-1 bg-[#499FC0] text-white hover:bg-[#499FC0]/90 hover:text-white h-[50px]">
               Keep Booking
             </Button>
-            <Button variant="destructive" onClick={handleCancelBooking} className="flex-1">
+            <Button variant="destructive" onClick={handleCancelBooking} className="flex-1 bg-[#D90202] h-[50px]">
               Cancel Booking
             </Button>
           </div>
@@ -184,7 +197,7 @@ export function BookingCancellation({ bookingId, onBack }: BookingCancellationPr
               <span className="font-medium text-red-600">-$5.00</span>
             </div>
             <div className="flex justify-between font-semibold border-t pt-2">
-              <span>Refund Amount</span>
+              <span className="text-lg text-[#2F2F2F]">Refund Amount</span>
               <span className="text-green-600">$24.00</span>
             </div>
           </div>

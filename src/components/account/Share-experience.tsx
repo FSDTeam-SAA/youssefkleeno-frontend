@@ -65,13 +65,13 @@ export function ShareExperience() {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="text-xl font-semibold">Write a Natural Review</CardTitle>
+      <CardHeader className="bg-[#F2F2F2] !border-none">
+        <CardTitle className="text-xl font-semibold text-[#282828]">Write a Natural Review</CardTitle>
       </CardHeader>
 
       <CardContent className="space-y-6">
-        <div className="space-y-3">
-          <Label className="text-sm font-medium text-blue-600">Rate Us</Label>
+        <div className="space-y-3 mt-10">
+          <Label className="text-xl font-medium text-[#333333]">Rate Us</Label>
           <div className="flex items-center gap-2">
             {[1, 2, 3, 4, 5].map((star) => {
               const isActive = star <= (hoveredRating || rating)
@@ -85,7 +85,7 @@ export function ShareExperience() {
                 >
                   <Star
                     className={`h-8 w-8 ${
-                      isActive ? "fill-yellow-400 text-yellow-400" : "text-gray-300 hover:text-yellow-400"
+                      isActive ? "fill-[#FACC15] text-[#FACC15]" : "text-[#FACC15] hover:text-[#FACC15]/90"
                     }`}
                   />
                 </button>
@@ -96,7 +96,7 @@ export function ShareExperience() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="description" className="text-sm font-medium text-blue-600">
+          <Label htmlFor="description" className="text-xl font-medium text-[#333333">
             Description
           </Label>
           <Textarea
@@ -112,7 +112,7 @@ export function ShareExperience() {
         <div className="flex justify-end">
           <Button
             onClick={handleSubmit}
-            className="bg-blue-600 hover:bg-blue-700 px-8"
+            className="bg-[#499FC0] hover:bg-[#499FC0]/90 text-white py-2 rounded-[6px] px-8"
             disabled={rating === 0 || description.trim().length < 10}
           >
             Save
