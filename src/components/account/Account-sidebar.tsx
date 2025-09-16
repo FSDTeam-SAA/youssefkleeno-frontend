@@ -39,7 +39,7 @@ export function AccountSidebar({
   onSectionChange,
 }: AccountSidebarProps) {
   return (
-    <Card className="p-6 !bg-[#FFFFFF] !rounded-[6px]">
+    <Card className="p-6 !bg-[#FFFFFF] !rounded-[6px] !sticky top-0 ">
       {/* User Profile */}
       <div className="flex items-center gap-3 mb-8 border-b border-[#E5E7EB] pb-4">
         <Avatar className="h-[80px] w-[80px]">

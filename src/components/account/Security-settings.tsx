@@ -57,13 +57,13 @@ export function SecuritySettings() {
 
   return (
     <Card>
-      <CardHeader>
-        <CardTitle className="text-xl font-semibold">Security Settings</CardTitle>
+      <CardHeader className="bg-[#F2F2F2] !border-none">
+        <CardTitle className="text-[18px] font-semibold text-[#282828] ">Security Settings</CardTitle>
       </CardHeader>
 
-      <CardContent className="space-y-6">
+      <CardContent className="space-y-6 pt-10">
         <div className="space-y-2">
-          <Label htmlFor="currentPassword" className="text-sm font-medium text-blue-600">
+          <Label htmlFor="currentPassword" className="text-xl font-medium text-[#499FC0]">
             Current Password
           </Label>
           <div className="relative">
@@ -73,7 +73,7 @@ export function SecuritySettings() {
               value={formData.currentPassword}
               onChange={(e) => handleInputChange("currentPassword", e.target.value)}
               placeholder="••••••••••"
-              className="pr-10"
+              className="pr-10 border border-[#0000004D] rounded-[6px] h-[50px]"
             />
             <button
               type="button"
@@ -86,7 +86,7 @@ export function SecuritySettings() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="newPassword" className="text-sm font-medium text-blue-600">
+          <Label htmlFor="newPassword" className="text-xl font-medium text-[#499FC0]">
             New Password
           </Label>
           <div className="relative">
@@ -96,7 +96,7 @@ export function SecuritySettings() {
               value={formData.newPassword}
               onChange={(e) => handleInputChange("newPassword", e.target.value)}
               placeholder="••••••••••"
-              className="pr-10"
+              className="pr-10 border border-[#0000004D] rounded-[6px] h-[50px]"
             />
             <button
               type="button"
@@ -109,7 +109,7 @@ export function SecuritySettings() {
         </div>
 
         <div className="space-y-2">
-          <Label htmlFor="confirmPassword" className="text-sm font-medium text-blue-600">
+          <Label htmlFor="confirmPassword" className="text-xl font-medium text-[#499FC0]">
             Confirm New Password
           </Label>
           <div className="relative">
@@ -119,7 +119,7 @@ export function SecuritySettings() {
               value={formData.confirmPassword}
               onChange={(e) => handleInputChange("confirmPassword", e.target.value)}
               placeholder="••••••••••"
-              className="pr-10"
+              className="pr-10 border border-[#0000004D] rounded-[6px] h-[50px]"
             />
             <button
               type="button"
@@ -134,7 +134,7 @@ export function SecuritySettings() {
         <div className="flex justify-end pt-4">
           <Button
             onClick={handleSaveChanges}
-            className="bg-blue-600 hover:bg-blue-700"
+            className="bg-[#499FC0] hover:bg-[#499FC0]/90"
             disabled={!formData.currentPassword || !formData.newPassword || !formData.confirmPassword}
           >
             Save Changes

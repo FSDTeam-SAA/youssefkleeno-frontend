@@ -57,7 +57,7 @@ export function PersonalInformation() {
           <Button
             variant="outline"
             onClick={() => setIsEditing(true)}
-            className="text-blue-600 border-blue-200 hover:bg-blue-50"
+            className="text-white bg-[#499FC0] border-[#499FC0] hover:bg-[#499FC0]/90 hover:text-white "
           >
             Update profile
           </Button>
@@ -182,7 +182,7 @@ export function PersonalInformation() {
             <Button variant="outline" onClick={handleCancel}>
               Cancel
             </Button>
-            <Button onClick={handleSave} className="bg-blue-600 hover:bg-blue-700">
+            <Button onClick={handleSave} className="bg-[#499FC0] hover:bg-[#499FC0]/90">
               Update now
             </Button>
           </div>
