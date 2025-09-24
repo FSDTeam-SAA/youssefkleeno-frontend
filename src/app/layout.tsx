@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "sonner";
+import QueryProvider from "@/providers/query-provider";
 
 
 const montserrat = Montserrat({
@@ -30,7 +31,9 @@ export default function RootLayout({
       <body
         className={`${montserrat.variable} font-sans antialiased min-h-screen flex flex-col`}
       >
+       <QueryProvider>
         {children}
+       </QueryProvider>
         <Toaster/>
       </body>
     </html>

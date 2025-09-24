@@ -14,7 +14,7 @@ const WashType = () => {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
             {/* Dry Wash */}
-            <Card className="text-left border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <Card className="text-left  shadow-[0px_2px_6px_0px_#00000029] hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <CardHeader className="pb-4">
                 <div className="flex items-center space-x-4 mb-3">
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center">
@@ -31,7 +31,7 @@ const WashType = () => {
             </Card>
 
             {/* Water Wash */}
-            <Card className="text-left border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
+            <Card className="text-left shadow-[0px_2px_6px_0px_#00000029]   hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <CardHeader className="pb-4">
                 <div className="flex items-center space-x-4 mb-3">
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
@@ -52,7 +52,7 @@ const WashType = () => {
             </Card>
 
             {/* Steam Wash */}
-            <Card className="text-left border-0 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1 sm:col-span-2 lg:col-span-1">
+            <Card className="text-left shadow-[0px_2px_6px_0px_#00000029]   border hover:shadow-xl transition-all duration-300 hover:-translate-y-1 sm:col-span-2 lg:col-span-1">
               <CardHeader className="pb-4">
                 <div className="flex items-center space-x-4 mb-3">
                   <div className="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center">
