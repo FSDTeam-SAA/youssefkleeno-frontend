@@ -28,6 +28,7 @@ export function PersonalInformation() {
 
   const handleSave = () => {
     // Simulate API call
+    console.log("Saving form data:", formData)
     setTimeout(() => {
       toast.success("Profile updated successfully!")
       setIsEditing(false)
@@ -50,8 +51,8 @@ export function PersonalInformation() {
   }
 
   return (
-    <Card>
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-6 bg-[#F2F2F2] !border-none">
+    <Card className="!border-none ">
+      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-6 !bg-[#F5F5F5]  rounded-tl-[8px] rounded-tr-[8px] !shadow-none">
         <CardTitle className="text-[18px] font-semibold text-[#282828] ">Personal Information </CardTitle>
         {!isEditing && (
           <Button
@@ -75,7 +76,7 @@ export function PersonalInformation() {
               value={formData.fullName}
               onChange={(e) => handleInputChange("fullName", e.target.value)}
               disabled={!isEditing}
-              className="disabled:bg-gray-50 disabled:text-gray-900 border border-[#0000004D] rounded-[8px] h-[50px]"
+              className=" disabled:text-gray-900 border border-[#0000004D] rounded-[8px] h-[50px]"
             />
           </div>
 
@@ -89,7 +90,7 @@ export function PersonalInformation() {
               value={formData.email}
               onChange={(e) => handleInputChange("email", e.target.value)}
               disabled={!isEditing}
-            className="disabled:bg-gray-50 disabled:text-gray-900 border border-[#0000004D] rounded-[8px] h-[50px]"
+            className=" disabled:text-gray-900 border border-[#0000004D] rounded-[8px] h-[50px]"
             />
           </div>
         </div>
@@ -104,7 +105,7 @@ export function PersonalInformation() {
               value={formData.phone}
               onChange={(e) => handleInputChange("phone", e.target.value)}
               disabled={!isEditing}
-            className="disabled:bg-gray-50 disabled:text-gray-900 border border-[#0000004D] rounded-[8px] h-[50px]"
+            className=" disabled:text-gray-900 border border-[#0000004D] rounded-[8px] h-[50px]"
             />
           </div>
 
@@ -118,7 +119,7 @@ export function PersonalInformation() {
               value={formData.dateOfBirth}
               onChange={(e) => handleInputChange("dateOfBirth", e.target.value)}
               disabled={!isEditing}
-             className="disabled:bg-gray-50 disabled:text-gray-900 border border-[#0000004D] rounded-[8px] h-[50px]"
+             className=" disabled:text-gray-900 border border-[#0000004D] rounded-[8px] h-[50px]"
             />
           </div>
         </div>
@@ -132,7 +133,7 @@ export function PersonalInformation() {
             value={formData.streetAddress}
             onChange={(e) => handleInputChange("streetAddress", e.target.value)}
             disabled={!isEditing}
-          className="disabled:bg-gray-50 disabled:text-gray-900 border border-[#0000004D] rounded-[8px] h-[50px]"
+          className=" disabled:text-gray-900 border border-[#0000004D] rounded-[8px] h-[50px]"
           />
         </div>
 
@@ -146,7 +147,7 @@ export function PersonalInformation() {
               value={formData.city}
               onChange={(e) => handleInputChange("city", e.target.value)}
               disabled={!isEditing}
-             className="disabled:bg-gray-50 disabled:text-gray-900 border border-[#0000004D] rounded-[8px] h-[50px]"
+             className=" disabled:text-gray-900 border border-[#0000004D] rounded-[8px] h-[50px]"
             />
           </div>
 
@@ -159,7 +160,7 @@ export function PersonalInformation() {
               value={formData.state}
               onChange={(e) => handleInputChange("state", e.target.value)}
               disabled={!isEditing}
-             className="disabled:bg-gray-50 disabled:text-gray-900 border border-[#0000004D] rounded-[8px] h-[50px]"
+             className=" disabled:text-gray-900 border border-[#0000004D] rounded-[8px] h-[50px]"
             />
           </div>
 
@@ -172,7 +173,7 @@ export function PersonalInformation() {
               value={formData.zipCode}
               onChange={(e) => handleInputChange("zipCode", e.target.value)}
               disabled={!isEditing}
-            className="disabled:bg-gray-50 disabled:text-gray-900 border border-[#0000004D] rounded-[8px] h-[50px]"
+            className=" disabled:text-gray-900 border border-[#0000004D] rounded-[8px] h-[50px]"
             />
           </div>
         </div>

@@ -23,7 +23,7 @@ interface BookingCancellationProps {
 }
 
 export function BookingCancellation({ bookingId, onBack }: BookingCancellationProps) {
-    console.log(bookingId)
+    console.log(bookingId , "bookingId")
   const [reason, setReason] = useState("")
   const [showConfirmDialog, setShowConfirmDialog] = useState(false)
 
