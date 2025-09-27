@@ -1,8 +1,10 @@
 import { Metadata } from 'next';
 import {Montserrat} from 'next/font/google';
 import "./globals.css";
+
 import { Toaster } from 'sonner';
 import Providers from '@/components/provider/QueryClientProvider';
+
 
 
 
@@ -31,11 +33,12 @@ export default function RootLayout({
     <html lang="en" >
       <body
         className={`${montserrat.className} font-sans antialiased min-h-screen flex flex-col`}
-      >
+
         <Providers>
 
         {children}
         </Providers>
+
         <Toaster/>
       </body>
     </html>
