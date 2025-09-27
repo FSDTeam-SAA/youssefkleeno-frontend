@@ -1,14 +1,17 @@
-import type { Metadata } from "next";
-import { Montserrat } from "next/font/google";
+import { Metadata } from 'next';
+import {Montserrat} from 'next/font/google';
 import "./globals.css";
-import { Toaster } from "sonner";
-import QueryProvider from "@/providers/query-provider";
+
+import { Toaster } from 'sonner';
+import Providers from '@/components/provider/QueryClientProvider';
+
+
 
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-montserrat",
-  display: "swap",
+  variable: "--font-geist-sans",
+  weight: ["100","200","400", "500", "600", "700"],
 });
 
 
@@ -29,11 +32,13 @@ export default function RootLayout({
   return (
     <html lang="en" >
       <body
-        className={`${montserrat.variable} font-sans antialiased min-h-screen flex flex-col`}
-      >
-       <QueryProvider>
+        className={`${montserrat.className} font-sans antialiased min-h-screen flex flex-col`}
+
+        <Providers>
+
         {children}
-       </QueryProvider>
+        </Providers>
+
         <Toaster/>
       </body>
     </html>
