@@ -33,6 +33,8 @@ export function ShareExperience() {
       return
     }
 
+    console.log(rating, description)
+
     if (description.trim().length < 10) {
      toast.success("Review submitted successfully!")
       return
