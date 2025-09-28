@@ -1,25 +1,23 @@
-import type { Metadata } from "next";
+import { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
-import { Toaster } from "sonner";
-import QueryProvider from "@/providers/query-provider";
 
+import { Toaster } from "sonner";
+import Providers from "@/components/provider/QueryClientProvider";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
-  variable: "--font-montserrat",
-  display: "swap",
+  variable: "--font-geist-sans",
+  weight: ["100", "200", "400", "500", "600", "700"],
 });
-
 
 export const metadata: Metadata = {
   title: "Car Wash",
   description: "Car Wash",
   icons: {
     icon: "/navlogo.png",
-  }
+  },
 };
-
 
 export default function RootLayout({
   children,
@@ -27,14 +25,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" >
+    <html lang="en">
       <body
-        className={`${montserrat.variable} font-sans antialiased min-h-screen flex flex-col`}
+        className={`${montserrat.className} font-sans antialiased min-h-screen flex flex-col`}
       >
-       <QueryProvider>
-        {children}
-       </QueryProvider>
-        <Toaster/>
+        <Providers>
+          {children}
+          <Toaster />
+        </Providers>
       </body>
     </html>
   );
