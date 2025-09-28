@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import PersonalInformationForm from "./_components/personal-information-form";
 
 const PersonalInformationPage = () => {
   return (
     <div>
-      personal informaton page
+      <PersonalInformationForm />
     </div>
-  )
-}
+  );
+};
 
-export default PersonalInformationPage
+export default PersonalInformationPage;
