@@ -7,13 +7,13 @@ import WashType from "@/components/WashType";
 
 export default function Home() {
   return (
-<div>
-  <Hero/>
-  <Services/>
-  <WashType/>
-  <HowItWorks/>
-  <GetOurCarWashApp/>
-<HomePage/>
-</div>
+    <div>
+      <Hero />
+      <Services />
+      <WashType />
+      <HowItWorks />
+      <GetOurCarWashApp />
+      <HomePage />
+    </div>
   );
 }
