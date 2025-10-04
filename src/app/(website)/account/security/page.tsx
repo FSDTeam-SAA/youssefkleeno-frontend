@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import SecurityForm from "./_components/security-form";
 
 const SecurityPage = () => {
   return (
     <div>
-      security page
+      <SecurityForm />
     </div>
-  )
-}
+  );
+};
 
-export default SecurityPage
+export default SecurityPage;

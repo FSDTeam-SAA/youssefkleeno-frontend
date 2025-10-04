@@ -35,25 +35,25 @@ const formSchema = z.object({
   phoneNumber: z
     .string()
     .regex(/^\+?[0-9]{10,15}$/, { message: "Enter a valid phone number." }),
-     city: z.string().min(2, {
+  city: z.string().min(2, {
     message: "City must be at least 2 characters.",
   }),
-   state: z.string().min(2, {
+  state: z.string().min(2, {
     message: "State must be at least 2 characters.",
   }),
-   zipCode: z.string().min(2, {
+  zipCode: z.string().min(2, {
     message: "Zip Code must be at least 2 characters.",
   }),
-   street: z.string().min(2, {
+  street: z.string().min(2, {
     message: "Zip Code must be at least 2 characters.",
   }),
-    dateOfBirth: z.date({
+  dateOfBirth: z.date({
     message: "Please select a start date",
   }),
 });
 
 const PersonalInformationForm = () => {
-    const [isEditing, setIsEditing] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -78,15 +78,18 @@ const PersonalInformationForm = () => {
         <h4 className="text-lg font-medium text-[#282828] leading-[120%]">
           Personal Information
         </h4>
-       <div>
-        {
-            isEditing ? (
-                <p></p>
-            ) : ( <button onClick={()=>setIsEditing(true)} className="text-sm font-medium hover:font-semibold text-[#282828] leading-[120%] hover:underline">
-          Update Profile
-        </button>)
-        }
-       </div>
+        <div>
+          {isEditing ? (
+            <p></p>
+          ) : (
+            <button
+              onClick={() => setIsEditing(true)}
+              className="text-sm font-medium hover:font-semibold text-[#282828] leading-[120%] hover:underline"
+            >
+              Update Profile
+            </button>
+          )}
+        </div>
       </div>
       <div>
         <Form {...form}>
@@ -105,7 +108,9 @@ const PersonalInformationForm = () => {
                     </FormLabel>
                     <FormControl>
                       <Input
-                        className="w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5"
+                        className={`w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5 ${
+                          isEditing ? "cursor-default" : "cursor-not-allowed"
+                        }`}
                         placeholder="John Smith"
                         {...field}
                       />
@@ -124,7 +129,9 @@ const PersonalInformationForm = () => {
                     </FormLabel>
                     <FormControl>
                       <Input
-                        className="w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5"
+                        className={`w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5 ${
+                          isEditing ? "cursor-default" : "cursor-not-allowed"
+                        }`}
                         placeholder="john.smith@example.com"
                         {...field}
                       />
@@ -141,11 +148,13 @@ const PersonalInformationForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-normal text-[#499FC0] leading-[120%]">
-                     Phone Number
+                      Phone Number
                     </FormLabel>
                     <FormControl>
                       <Input
-                        className="w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5"
+                        className={`w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5 ${
+                          isEditing ? "cursor-default" : "cursor-not-allowed"
+                        }`}
                         placeholder="(555) 123-4567"
                         {...field}
                       />
@@ -154,19 +163,23 @@ const PersonalInformationForm = () => {
                   </FormItem>
                 )}
               />
-               {/* Date Picker */}
+              {/* Date Picker */}
               <FormField
                 control={form.control}
                 name="dateOfBirth"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel className="text-sm font-medium text-[#03090D] leading-[120%] pb-[6px]">Date of Birth</FormLabel>
+                    <FormLabel className="text-sm font-medium text-[#03090D] leading-[120%] pb-[6px]">
+                      Date of Birth
+                    </FormLabel>
                     <Popover>
                       <PopoverTrigger asChild>
                         <FormControl>
                           <Button
                             variant="outline"
                             className={`h-[56px] pl-3 text-left font-normal ${
+                          isEditing ? "cursor-default" : "cursor-not-allowed"
+                        } ${
                               !field.value && "text-muted-foreground"
                             }`}
                           >
@@ -202,11 +215,13 @@ const PersonalInformationForm = () => {
                 render={({ field }) => (
                   <FormItem>
                     <FormLabel className="text-sm font-normal text-[#499FC0] leading-[120%]">
-                     Street Address
+                      Street Address
                     </FormLabel>
                     <FormControl>
                       <Input
-                        className="w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5"
+                        className={`w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5 ${
+                          isEditing ? "cursor-default" : "cursor-not-allowed"
+                        }`}
                         placeholder="123 Main Street"
                         {...field}
                       />
@@ -215,9 +230,8 @@ const PersonalInformationForm = () => {
                   </FormItem>
                 )}
               />
-              
             </div>
-             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <FormField
                 control={form.control}
                 name="city"
@@ -228,7 +242,9 @@ const PersonalInformationForm = () => {
                     </FormLabel>
                     <FormControl>
                       <Input
-                        className="w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5"
+                        className={`w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5 ${
+                          isEditing ? "cursor-default" : "cursor-not-allowed"
+                        }`}
                         placeholder="New York"
                         {...field}
                       />
@@ -247,7 +263,9 @@ const PersonalInformationForm = () => {
                     </FormLabel>
                     <FormControl>
                       <Input
-                        className="w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5"
+                        className={`w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5 ${
+                          isEditing ? "cursor-default" : "cursor-not-allowed"
+                        }`}
                         placeholder="NY"
                         {...field}
                       />
@@ -266,7 +284,9 @@ const PersonalInformationForm = () => {
                     </FormLabel>
                     <FormControl>
                       <Input
-                        className="w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5"
+                        className={`w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5 ${
+                          isEditing ? "cursor-default" : "cursor-not-allowed"
+                        }`}
                         placeholder="10001"
                         {...field}
                       />
@@ -276,11 +296,16 @@ const PersonalInformationForm = () => {
                 )}
               />
             </div>
-           <div className="flex items-center justify-center ">
-            {
-                isEditing &&  <Button className="my-5 h-[51px] bg-[#499FC0] rounded-[8px] text-[#F4F4F4] text-base font-medium leading-[120%] py-4 px-[47px]" type="submit">Update now</Button>
-            }
-           </div>
+            <div className="flex items-center justify-center ">
+              {isEditing && (
+                <Button
+                  className="my-5 h-[51px] bg-[#499FC0] rounded-[8px] text-[#F4F4F4] text-base font-medium leading-[120%] py-4 px-[47px]"
+                  type="submit"
+                >
+                  Update now
+                </Button>
+              )}
+            </div>
           </form>
         </Form>
       </div>
