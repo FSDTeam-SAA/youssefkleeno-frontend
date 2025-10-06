@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button"
+
 import { Card, CardContent} from "@/components/ui/card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
 import { Star  } from "lucide-react"
@@ -20,7 +20,7 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="order-2 lg:order-1">
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6">Get Our Car Wash App</h2>
-              <p className="text-lg text-gray-600 mb-8">
+              <p className="text-lg text-[#2F2F2F] text-[18px] font-midium mb-8">
                 Experience the convenience of car washing at your fingertips. Our mobile app makes scheduling, tracking,
                 and managing your car wash services easier than ever.
               </p>
@@ -71,7 +71,7 @@ export default function HomePage() {
             <div className="order-1 lg:order-2 flex justify-center">
               <div className="relative">
                 <div className="w-64 h-[500px] bg-gray-900 rounded-[3rem] p-2 shadow-2xl">
-                  <div className="w-full h-full bg-white rounded-[2.5rem] overflow-hidden">
+                  <div className="w-full h-full bg-[#F9FAFB]  border rounded-[2.5rem] overflow-hidden">
                     <div className="bg-blue-500 h-20 flex items-center justify-center">
                       <span className="text-white font-semibold">Car Wash App</span>
                     </div>
@@ -95,63 +95,63 @@ export default function HomePage() {
 
       {/* FAQ Section */}
       <section className="py-16 lg:py-24 bg-[#FFFFFF]">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className=" container mx-auto px-4 sm:px-6 lg:px-8 ">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-[#2F2F2F] mb-4">
               Frequently Asked Questions
             </h2>
-            <p className="text-lg text-gray-600">Everything you need to know about our car wash service</p>
+            <p className="text-lg text-[#2F2F2F]  font-midium">Everything you need to know about our car wash service</p>
           </div>
 
-          <div className="max-w-3xl mx-auto">
+          <div className="w-full mx-auto">
             <Accordion type="single" collapsible className="space-y-4">
-              <AccordionItem value="item-1" className="bg-white rounded-lg px-6">
-                <AccordionTrigger className="text-left">How does the mobile car wash service work?</AccordionTrigger>
-                <AccordionContent className="text-gray-600">
+              <AccordionItem value="item-1" className="bg-[#F9FAFB]  border rounded-lg px-6">
+                <AccordionTrigger className="text-left text-xl  text-[#499FC0] font-midium">How does the mobile car wash service work?</AccordionTrigger>
+                <AccordionContent className="text-[#2F2F2F] text-[18px] font-midium">
                   Our mobile car wash service brings professional cleaning directly to your location. Simply book
                   through our app or website, and our trained professionals will arrive with all necessary equipment and
                   eco-friendly products.
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="item-2" className="bg-white rounded-lg px-6">
-                <AccordionTrigger className="text-left">
+              <AccordionItem value="item-2" className="bg-[#F9FAFB]  border rounded-lg px-6">
+                <AccordionTrigger className="text-left text-xl  text-[#499FC0] font-midium">
                   What is the difference between wash and water wash?
                 </AccordionTrigger>
-                <AccordionContent className="text-gray-600">
+                <AccordionContent className="text-[#2F2F2F] text-[18px] font-midium">
                   Our dry wash uses eco-friendly, waterless cleaning products that are safe for your car and the
                   environment. Water wash uses traditional methods with water and soap, providing a thorough clean but
                   requires more resources.
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="item-3" className="bg-white rounded-lg px-6">
-                <AccordionTrigger className="text-left">How long does a typical car wash take?</AccordionTrigger>
-                <AccordionContent className="text-gray-600">
+              <AccordionItem value="item-3" className="bg-[#F9FAFB]  border rounded-lg px-6">
+                <AccordionTrigger className="text-left text-xl  text-[#499FC0] font-midium">How long does a typical car wash take?</AccordionTrigger>
+                <AccordionContent className="text-[#2F2F2F] text-[18px] font-midium">
                   A standard car wash typically takes 30-45 minutes, depending on the size of your vehicle and the type
                   of service selected. Premium services may take up to an hour.
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="item-4" className="bg-white rounded-lg px-6">
-                <AccordionTrigger className="text-left">Do I need to be present during the car wash?</AccordionTrigger>
-                <AccordionContent className="text-gray-600">
+              <AccordionItem value="item-4" className="bg-[#F9FAFB]  border rounded-lg px-6">
+                <AccordionTrigger className="text-left text-xl  text-[#499FC0] font-midium">Do I need to be present during the car wash?</AccordionTrigger>
+                <AccordionContent className="text-[#2F2F2F] text-[18px] font-midium">
                   While it&apos;s not required, we recommend being present or having someone available to provide access to
                   your vehicle and answer any questions our team might have.
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="item-5" className="bg-white rounded-lg px-6">
-                <AccordionTrigger className="text-left">How does the subscription plan work?</AccordionTrigger>
-                <AccordionContent className="text-gray-600">
+              <AccordionItem value="item-5" className="bg-[#F9FAFB]  border rounded-lg px-6">
+                <AccordionTrigger className="text-left text-xl  text-[#499FC0] font-midium">How does the subscription plan work?</AccordionTrigger>
+                <AccordionContent className="text-[#2F2F2F] text-[18px] font-midium">
                   Our subscription plans offer regular car washes at discounted rates. You can choose weekly, bi-weekly,
                   or monthly schedules, and easily manage your subscription through our mobile app.
                 </AccordionContent>
               </AccordionItem>
 
-              <AccordionItem value="item-6" className="bg-white rounded-lg px-6">
-                <AccordionTrigger className="text-left">Is the service available in all areas?</AccordionTrigger>
-                <AccordionContent className="text-gray-600">
+              <AccordionItem value="item-6" className="bg-[#F9FAFB]  border rounded-lg px-6">
+                <AccordionTrigger className="text-left text-xl  text-[#499FC0] font-midium">Is the service available in all areas?</AccordionTrigger>
+                <AccordionContent className="text-[#2F2F2F] text-[18px] font-midium">
                   We currently serve most metropolitan areas. Check our app or website to see if we service your
                   location. We&apos;re constantly expanding our coverage area.
                 </AccordionContent>
@@ -159,8 +159,9 @@ export default function HomePage() {
             </Accordion>
 
             <div className="text-center mt-8">
-              <p className="text-gray-600 mb-4">Still have questions? Contact our support team!</p>
-              <Button variant="outline">Contact Support</Button>
+              <p className="text-[#2F2F2F] text-[18px] font-midium mb-4">Still have questions? Contact our support team!</p>
+              {/* <Button variant="outline">Contact Support</Button> */}
+              <p className="text-base text-[#499FC0] font-medium">support@carwash.com</p>
             </div>
           </div>
         </div>
@@ -171,7 +172,7 @@ export default function HomePage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">What Our Customers Say</h2>
-            <p className="text-lg text-gray-600">
+            <p className="text-lg text-[#2F2F2F] text-[18px] font-midium">
               Don&apos;t just take our word for it - read what satisfied customers have to say
             </p>
           </div>
@@ -185,7 +186,7 @@ export default function HomePage() {
                     <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                <p className="text-gray-600 mb-4">
+                <p className="text-[#2F2F2F] text-[18px] font-midium mb-4">
                   &apos;I love the convenience of having my car washed at my office. The team is professional and my car
                   always looks amazing!&apos;
                 </p>
@@ -209,7 +210,7 @@ export default function HomePage() {
                     <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                <p className="text-gray-600 mb-4">
+                <p className="text-[#2F2F2F] text-[18px] font-midium mb-4">
                   &apos;The monthly subscription is perfect for my busy lifestyle. Great service and competitive pricing!&apos;
                 </p>
                 <div className="flex items-center space-x-3">
@@ -232,7 +233,7 @@ export default function HomePage() {
                     <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
                   ))}
                 </div>
-                <p className="text-gray-600 mb-4">
+                <p className="text-[#2F2F2F] text-[18px] font-midium mb-4">
                   &apos;Eco-friendly dry wash is amazing! My car looks great and I feel good about helping the environment.&apos;
                 </p>
                 <div className="flex items-center space-x-3">

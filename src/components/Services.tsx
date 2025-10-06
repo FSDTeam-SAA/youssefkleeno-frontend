@@ -18,8 +18,8 @@ const Services = () => {
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-6xl mx-auto">
-            <Card className="relative overflow-hidden border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+          <div className="grid md:grid-cols-2 gap-8  mx-auto">
+            <Card className="relative overflow-hidden border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 p-[32px]">
               <CardHeader className="text-left pb-6">
                 <div className="flex items-center space-x-4 mb-4">
                   <div
@@ -33,7 +33,7 @@ const Services = () => {
                  
                   </div>
                 </div>
-                   <CardDescription className="text-base mt-1">
+                   <CardDescription className="text-base text-[#2F2F2F] mt-1">
                       Save money with our monthly plan. Get 4 washes per month, one each week.
                     </CardDescription>
               </CardHeader>
@@ -60,14 +60,14 @@ const Services = () => {
                 </div>
                 <Button
                   style={{ backgroundColor: "#499FC0" }}
-                  className="w-full hover:opacity-90 text-white py-3 text-lg font-semibold"
+                  className="w-full hover:opacity-90 text-white h-[45px] text-lg font-semibold"
                 >
                   Get Monthly Subscription
                 </Button>
               </CardContent>
             </Card>
 
-            <Card className="relative overflow-hidden border-0 shadow-lg hover:shadow-xl transition-shadow duration-300">
+            <Card className="relative overflow-hidden border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 p-[32px]">
               <CardHeader className="text-left pb-6">
                 <div className="flex items-center space-x-4 mb-4">
                   <div
@@ -78,11 +78,14 @@ const Services = () => {
                   </div>
                   <div>
                     <CardTitle className="text-xl font-semibold">One-time Wash</CardTitle>
-                    <CardDescription className="text-base mt-1">
+                  
+                  </div>
+                </div>
+                  <div>
+                      <CardDescription className="text-base text-[#2F2F2F] mt-1">
                       Perfect for when you need a quick clean without commitment. Available for all vehicle types.
                     </CardDescription>
                   </div>
-                </div>
               </CardHeader>
               <CardContent className="space-y-6">
                 <div className="space-y-4">
@@ -107,7 +110,7 @@ const Services = () => {
                 </div>
                 <Button
                   style={{ backgroundColor: "#499FC0" }}
-                  className="w-full hover:opacity-90 text-white py-3 text-lg font-semibold"
+                  className="w-full hover:opacity-90 text-white h-[45px] text-lg font-semibold"
                 >
                   Book a One-time Wash
                 </Button>
