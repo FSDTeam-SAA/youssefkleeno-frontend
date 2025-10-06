@@ -12,7 +12,7 @@ const WashType = () => {
             <h2 className="text-3xl sm:text-4xl lg:text-[40px] font-semibold text-gray-900 mb-4">Our Wash Type</h2>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6  mx-auto">
             {/* Dry Wash */}
             <Card className="text-left  shadow-[0px_2px_6px_0px_#00000029] hover:shadow-xl transition-all duration-300 hover:-translate-y-1">
               <CardHeader className="pb-4">
@@ -42,8 +42,8 @@ const WashType = () => {
                 <p className="text-gray-600 mb-4">Water Wash</p>
               </CardHeader>
               <CardContent>
-                <div className="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
-                  <p className="text-sm text-yellow-800 font-medium">
+                <div className="bg-[#FACC15]/20 border border-[#FACC15] rounded-xl p-4">
+                  <p className="text-sm text-[#854D0E] font-medium">
                     <strong>Note:</strong> Only available if your location permits water usage. We&apos;ll confirm this after
                     you select your location.
                   </p>
@@ -63,8 +63,8 @@ const WashType = () => {
                 <p className="text-gray-600 mb-4">Deep cleaning with steam technology</p>
               </CardHeader>
               <CardContent>
-                <div className="bg-orange-50 border border-orange-200 rounded-xl p-4">
-                  <p className="text-sm text-orange-800 font-medium">
+                <div className="bg-[#FACC15]/20 border border-[#FACC15] rounded-xl p-4">
+                  <p className="text-sm text-[#854D0E] font-medium">
                     <strong>Note:</strong> One of the four wash options will include a Steam Wash.
                   </p>
                 </div>
