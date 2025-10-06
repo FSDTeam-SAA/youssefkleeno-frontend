@@ -15,7 +15,7 @@ const HowItWorks = () => {
             <p className="text-lg text-gray-600 text-balance">Getting your car washed has never been easier</p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8  mx-auto">
             {/* Step 1 */}
             <Card className="text-left border-0 shadow-md hover:shadow-xl transition-all duration-300 hover:-translate-y-1 bg-white">
               <CardHeader className="pb-4">
