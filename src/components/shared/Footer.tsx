@@ -22,11 +22,11 @@ const Footer = () => {
               <Image src="/footerLogo.png" alt="logo" width={100} height={100} className=''/>
         
               </div> 
-              <p className="text-gray-400 mb-4">
+              <p className="text-white mb-4">
                 Professional mobile car wash services at your doorstep. Eco-friendly solutions for a sparkling clean
                 car.
               </p>
-              <div className="text-sm text-gray-400">
+              <div className="text-sm text-white">
                 <p>© 2024 CleanCar. All rights reserved.</p>
               </div>
             </div>
@@ -34,7 +34,7 @@ const Footer = () => {
             {/* Services */}
             <div>
               <h3 className="font-semibold text-lg mb-4">Services</h3>
-              <ul className="space-y-2 text-gray-400">
+              <ul className="space-y-2 text-white">
                 <li>
                   <a href="#" className="hover:text-white transition-colors">
                     Dry Wash
@@ -61,7 +61,7 @@ const Footer = () => {
             {/* Contact */}
             <div>
               <h3 className="font-semibold text-lg mb-4">Contact Us</h3>
-              <div className="space-y-2 text-gray-400">
+              <div className="space-y-2 text-white">
                 <p>123 Main Street, Anytown, ST 12345</p>
                 <p>Phone: (555) 123-4567</p>
                 <p>Email: info@cleancar.com</p>
