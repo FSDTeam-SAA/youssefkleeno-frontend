@@ -41,10 +41,9 @@ export default function SecurityForm() {
   const [showCurrent, setShowCurrent] = useState(false);
   const [showNew, setShowNew] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
-  //   const session = useSession();
-  //   const token = (session?.data?.user as { accessToken: string })?.accessToken;
 
-  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGUwYjQ0YThkMTIxMjU1NTQyZTVkMDQiLCJlbWFpbCI6Imtvbmdrb25iZGNhbGxpbmc0NUBnbWFpbC5jb20iLCJpYXQiOjE3NTk1NTc5MzUsImV4cCI6MTc2NzMzMzkzNX0.YzCMMNnKO6y5aWQ9QyK9yTth6hQBSgnkLsS0zuMQxHU";
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJmZjg3NzIwZmZmYTNiYjA2ZjEyMDYiLCJlbWFpbCI6Im5pbG95QGV4YW1wbGUuY29tIiwiaWF0IjoxNzU5OTAyMDEwLCJleHAiOjE3NTk5ODg0MTB9.c5y5bKMOkqLCO6HjpJCYsbwo_VcTJB6ETTnUdwVjcMM";
 
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
@@ -62,7 +61,7 @@ export default function SecurityForm() {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-           Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(values),
       }).then((res) => res.json()),
@@ -81,6 +80,7 @@ export default function SecurityForm() {
     const payload = {
       currentPassword: values?.currentPassword,
       newPassword: values?.newPassword,
+      confirmPassword: values.confirmPassword,
     };
     mutate(payload);
   };
