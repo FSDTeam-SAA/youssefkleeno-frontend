@@ -21,8 +21,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
-import { useState } from "react";
-import { useQuery } from "@tanstack/react-query";
+import { useEffect, useState } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -48,7 +48,7 @@ const formSchema = z.object({
   street: z.string().min(2, {
     message: "Zip Code must be at least 2 characters.",
   }),
-  dateOfBirth: z.date({
+  dob: z.date({
     message: "Please select a start date",
   }),
 });
@@ -64,9 +64,9 @@ export interface ProfileResponse {
     _id: string;
     name: string;
     email: string;
-    lastActive: string; // ISO Date string
-    createdAt: string; // ISO Date string
-    updatedAt: string; // ISO Date string
+    lastActive: string;
+    createdAt: string;
+    updatedAt: string;
     __v: number;
     city: string;
     phone: string;
@@ -78,14 +78,15 @@ export interface ProfileResponse {
 
 const PersonalInformationForm = () => {
   const [isEditing, setIsEditing] = useState(false);
-  const token = process.env.NEXT_PUBLIC_FAKE_JWT;
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJmZjg3NzIwZmZmYTNiYjA2ZjEyMDYiLCJlbWFpbCI6Im5pbG95QGV4YW1wbGUuY29tIiwiaWF0IjoxNzU5OTA0MDczLCJleHAiOjE3NTk5OTA0NzN9.mn6lRS1vsu-PjKQO0KRFZLAY135W9YRsEVc1R6Z5nCo";
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
       email: "",
       phoneNumber: "",
-      dateOfBirth: undefined,
+      dob: undefined,
       city: "",
       state: "",
       zipCode: "",
@@ -93,6 +94,7 @@ const PersonalInformationForm = () => {
     },
   });
 
+  // profile get api
   const { data } = useQuery<ProfileResponse>({
     queryKey: ["profile"],
     queryFn: () =>
@@ -107,9 +109,48 @@ const PersonalInformationForm = () => {
 
   console.log(data?.data);
 
+  useEffect(() => {
+    if (data?.data) {
+      form.reset({
+        name: data?.data?.name,
+        email: data?.data?.email,
+        phoneNumber: data?.data?.phone,
+        dob: new Date(data?.data?.lastActive),
+        city: data?.data?.city,
+        state: data?.data?.state,
+        zipCode: data?.data?.zip,
+        street: data?.data?.street,
+      });
+    }
+  }, [data, form]);
+
+  // profile post api
+  const { mutate, isPending } = useMutation({
+    mutationKey: ["updateProfile"],
+    mutationFn: (formData: FormData) =>
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/update-profile`, {
+        method: "PATCH",
+        headers: {
+          // "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      }).then((res) => res.json()),
+  });
+
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
+    const formData = new FormData();
+    formData.append("name", values.name);
+    formData.append("email", values.email);
+    formData.append("phone", values.phoneNumber);
+    formData.append("city", values.city);
+    formData.append("state", values.state);
+    formData.append("zip", values.zipCode);
+    formData.append("street", values.street);
+    formData.append("lastActive", values.dob.toString());
+    mutate(formData);
   }
   return (
     <div className="bg-white rounded-[12px] shadow-[0px_2px_8px_0px_#00000029]">
@@ -147,8 +188,12 @@ const PersonalInformationForm = () => {
                     </FormLabel>
                     <FormControl>
                       <Input
+                        disabled={!isEditing}
+                        readOnly={!isEditing}
                         className={`w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5 ${
-                          isEditing ? "cursor-default" : "cursor-not-allowed"
+                          isEditing
+                            ? "cursor-text"
+                            : "cursor-not-allowed bg-gray-100"
                         }`}
                         placeholder="John Smith"
                         {...field}
@@ -168,8 +213,12 @@ const PersonalInformationForm = () => {
                     </FormLabel>
                     <FormControl>
                       <Input
+                        disabled={!isEditing}
+                        readOnly={!isEditing}
                         className={`w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5 ${
-                          isEditing ? "cursor-default" : "cursor-not-allowed"
+                          isEditing
+                            ? "cursor-text"
+                            : "cursor-not-allowed bg-gray-100"
                         }`}
                         placeholder="john.smith@example.com"
                         {...field}
@@ -191,8 +240,12 @@ const PersonalInformationForm = () => {
                     </FormLabel>
                     <FormControl>
                       <Input
+                        disabled={!isEditing}
+                        readOnly={!isEditing}
                         className={`w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5 ${
-                          isEditing ? "cursor-default" : "cursor-not-allowed"
+                          isEditing
+                            ? "cursor-text"
+                            : "cursor-not-allowed bg-gray-100"
                         }`}
                         placeholder="(555) 123-4567"
                         {...field}
@@ -205,10 +258,10 @@ const PersonalInformationForm = () => {
               {/* Date Picker */}
               <FormField
                 control={form.control}
-                name="dateOfBirth"
+                name="dob"
                 render={({ field }) => (
                   <FormItem className="flex flex-col">
-                    <FormLabel className="text-sm font-medium text-[#03090D] leading-[120%] pb-[6px]">
+                    <FormLabel className="text-sm font-normal text-[#499FC0] leading-[120%] pb-2">
                       Date of Birth
                     </FormLabel>
                     <Popover>
@@ -216,10 +269,11 @@ const PersonalInformationForm = () => {
                         <FormControl>
                           <Button
                             variant="outline"
-                            className={`h-[56px] pl-3 text-left font-normal ${
+                            disabled={!isEditing}
+                            className={`w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5 ${
                               isEditing
-                                ? "cursor-default"
-                                : "cursor-not-allowed"
+                                ? "cursor-text"
+                                : "cursor-not-allowed bg-gray-100"
                             } ${!field.value && "text-muted-foreground"}`}
                           >
                             {field.value
@@ -258,8 +312,12 @@ const PersonalInformationForm = () => {
                     </FormLabel>
                     <FormControl>
                       <Input
+                        disabled={!isEditing}
+                        readOnly={!isEditing}
                         className={`w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5 ${
-                          isEditing ? "cursor-default" : "cursor-not-allowed"
+                          isEditing
+                            ? "cursor-text"
+                            : "cursor-not-allowed bg-gray-100"
                         }`}
                         placeholder="123 Main Street"
                         {...field}
@@ -281,8 +339,12 @@ const PersonalInformationForm = () => {
                     </FormLabel>
                     <FormControl>
                       <Input
+                        disabled={!isEditing}
+                        readOnly={!isEditing}
                         className={`w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5 ${
-                          isEditing ? "cursor-default" : "cursor-not-allowed"
+                          isEditing
+                            ? "cursor-text"
+                            : "cursor-not-allowed bg-gray-100"
                         }`}
                         placeholder="New York"
                         {...field}
@@ -302,8 +364,12 @@ const PersonalInformationForm = () => {
                     </FormLabel>
                     <FormControl>
                       <Input
+                        disabled={!isEditing}
+                        readOnly={!isEditing}
                         className={`w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5 ${
-                          isEditing ? "cursor-default" : "cursor-not-allowed"
+                          isEditing
+                            ? "cursor-text"
+                            : "cursor-not-allowed bg-gray-100"
                         }`}
                         placeholder="NY"
                         {...field}
@@ -323,8 +389,12 @@ const PersonalInformationForm = () => {
                     </FormLabel>
                     <FormControl>
                       <Input
+                        disabled={!isEditing}
+                        readOnly={!isEditing}
                         className={`w-full h-[59px] text-base font-medium text-[#282828] leading-[120%] focus-visible:outline-none border border-[#0000004D] rounded-[8px] backdrop-blur-[12px] p-5 ${
-                          isEditing ? "cursor-default" : "cursor-not-allowed"
+                          isEditing
+                            ? "cursor-text"
+                            : "cursor-not-allowed bg-gray-100"
                         }`}
                         placeholder="10001"
                         {...field}
@@ -338,10 +408,11 @@ const PersonalInformationForm = () => {
             <div className="flex items-center justify-center ">
               {isEditing && (
                 <Button
+                  disabled={isPending}
                   className="my-5 h-[51px] bg-[#499FC0] rounded-[8px] text-[#F4F4F4] text-base font-medium leading-[120%] py-4 px-[47px]"
                   type="submit"
                 >
-                  Update now
+                  {isPending ? "Updating..." : "Update now"}
                 </Button>
               )}
             </div>
