@@ -204,27 +204,27 @@ const GetOurCarWashApp = () => {
               </div>
 
               {/* App Store Buttons */}
-              <div className="flex flex-col sm:flex-row gap-4 pt-4">
-                <Button className="h-[50px]">
-                  <Image
-                    src="/image 3.png"
-                    alt="app store"
-                    width={1000}
-                    height={1000}
-                    className="w-full h-full  object-cover"
-                  />
-                </Button>
+          <div className="flex flex-col sm:flex-row gap-4 pt-4 px-4 sm:px-6 lg:px-8">
+      <Button className="h-[50px] w-full sm:w-auto sm:flex-1 max-w-[200px]">
+        <Image
+          src="/image 3.png"
+          alt="Download from Apple App Store"
+          width={160}
+          height={50}
+          className="w-full h-full object-contain"
+        />
+      </Button>
 
-                <Button className="h-[50px]">
-                  <Image
-                    src="/image 4.png"
-                    alt="app store"
-                    width={1000}
-                    height={1000}
-                    className="w-full h-full  object-cover"
-                  />
-                </Button>
-              </div>
+      <Button className="h-[50px] w-full sm:w-auto sm:flex-1 max-w-[200px]">
+        <Image
+          src="/image 4.png"
+          alt="Download from Google Play Store"
+          width={160}
+          height={50}
+          className="w-full h-full object-contain"
+        />
+      </Button>
+    </div>
             </div>
           </div>
         </main>
