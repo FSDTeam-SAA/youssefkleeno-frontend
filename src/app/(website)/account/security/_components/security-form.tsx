@@ -44,6 +44,8 @@ export default function SecurityForm() {
   //   const session = useSession();
   //   const token = (session?.data?.user as { accessToken: string })?.accessToken;
 
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGUwYjQ0YThkMTIxMjU1NTQyZTVkMDQiLCJlbWFpbCI6Imtvbmdrb25iZGNhbGxpbmc0NUBnbWFpbC5jb20iLCJpYXQiOjE3NTk1NTc5MzUsImV4cCI6MTc2NzMzMzkzNX0.YzCMMNnKO6y5aWQ9QyK9yTth6hQBSgnkLsS0zuMQxHU";
+
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -56,11 +58,11 @@ export default function SecurityForm() {
   const { mutate, isPending } = useMutation({
     mutationKey: ["changePassword"],
     mutationFn: (values: { currentPassword: string; newPassword: string }) =>
-      fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/change-password`, {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/change-password`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          //   Authorization: `Bearer ${token}`,
+           Authorization: `Bearer ${token}`,
         },
         body: JSON.stringify(values),
       }).then((res) => res.json()),

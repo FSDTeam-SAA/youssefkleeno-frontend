@@ -22,6 +22,7 @@ import {
 } from "@/components/ui/popover";
 import { Calendar } from "@/components/ui/calendar";
 import { useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -52,8 +53,32 @@ const formSchema = z.object({
   }),
 });
 
+export interface ProfileResponse {
+  success: boolean;
+  message: string;
+  data: {
+    avatar: {
+      public_id: string;
+      url: string;
+    };
+    _id: string;
+    name: string;
+    email: string;
+    lastActive: string; // ISO Date string
+    createdAt: string; // ISO Date string
+    updatedAt: string; // ISO Date string
+    __v: number;
+    city: string;
+    phone: string;
+    state: string;
+    street: string;
+    zip: string;
+  };
+}
+
 const PersonalInformationForm = () => {
   const [isEditing, setIsEditing] = useState(false);
+  const token = process.env.NEXT_PUBLIC_FAKE_JWT;
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -67,6 +92,20 @@ const PersonalInformationForm = () => {
       street: "",
     },
   });
+
+  const { data } = useQuery<ProfileResponse>({
+    queryKey: ["profile"],
+    queryFn: () =>
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/profile`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }).then((res) => res.json()),
+  });
+
+  console.log(data?.data);
 
   // 2. Define a submit handler.
   function onSubmit(values: z.infer<typeof formSchema>) {
@@ -178,10 +217,10 @@ const PersonalInformationForm = () => {
                           <Button
                             variant="outline"
                             className={`h-[56px] pl-3 text-left font-normal ${
-                          isEditing ? "cursor-default" : "cursor-not-allowed"
-                        } ${
-                              !field.value && "text-muted-foreground"
-                            }`}
+                              isEditing
+                                ? "cursor-default"
+                                : "cursor-not-allowed"
+                            } ${!field.value && "text-muted-foreground"}`}
                           >
                             {field.value
                               ? field.value.toLocaleDateString("en-US", {
