@@ -9,6 +9,11 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 
+export interface SelectedDate {
+  date: string; // e.g., "2025-10-09"
+  timeSlot: string; // e.g., "8:00 AM-10:00 AM"
+  steamWash: boolean; // Whether Steam Wash is selected
+}
 import { CheckCircle, Droplets, Calendar, Zap, Car } from "lucide-react";
 import { Button } from "./ui/button";
 import MonthlySubscribe from "@/app/(website)/_components/monthly-subscribe";
@@ -19,6 +24,7 @@ import { Service } from "@/app/(website)/_components/monthly-wash-type";
 import MonthlyWashType from "@/app/(website)/_components/monthly-wash-type";
 import MonthlyLocation from "@/app/(website)/_components/monthly-location";
 import MonthlyVehiclePhotos from "@/app/(website)/_components/monthly-vehicle-photos";
+import MonthlySelectDate from "@/app/(website)/_components/monthly-select-date";
 const Services = () => {
   const [monthlySubscribeOpen, setMonthlySubscribeOpen] = useState(false);
   const [monthlySelectVehicleOpen, setMonthlySelectVehicleOpen] =
@@ -35,6 +41,10 @@ const Services = () => {
       licensePlate: string;
     } | null>(null);
   console.log("Selected Vehicle Details:", selectedMonthlyVehiclePhoto);
+
+  const [dateSelectionModalOpen, setDateSelectionModalOpen] = useState(false);
+  const [selectedDates, setSelectedDates] = useState<SelectedDate[]>([]);
+  console.log("Selected Dates:", selectedDates, setSelectedDates);
 
   // ✅ store selected vehicle
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
@@ -238,9 +248,22 @@ const Services = () => {
             onOpenChange={setMonthlyVehiclePhotosModalOpen}
             onNext={(details) => {
               setSelectedMonthlyVehiclePhoto(details);
-              // Proceed to payment or final submission here
-              console.log("All details collected. Proceed to submit.", details);
+              setMonthlyVehiclePhotosModalOpen(false);
+              setDateSelectionModalOpen(true);
             }}
+          />
+        )}
+
+        {dateSelectionModalOpen && (
+          <MonthlySelectDate
+            open={dateSelectionModalOpen}
+            onOpenChange={setDateSelectionModalOpen}
+            onNext={(selectedDates) => {
+              // setSelectedDates(selectedDates);
+              // Proceed to payment or final submission here
+              console.log("Dates selected. Proceed to payment.", selectedDates);
+            }}
+            
           />
         )}
       </>
