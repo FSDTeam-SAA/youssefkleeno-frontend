@@ -40,7 +40,7 @@ interface MontlyWashTypeProps {
   onNext: (service: Service) => void; // trigger next step on Continue
 }
 
-const MontlyWashType = ({ open, onOpenChange, onNext }: MontlyWashTypeProps) => {
+const MonthlyWashType = ({ open, onOpenChange, onNext }: MontlyWashTypeProps) => {
   const [selectedServiceId, setSelectedServiceId] = useState<string>("");
   const [selectedServiceObj, setSelectedServiceObj] = useState<Service | null>(null);
 
@@ -108,4 +108,4 @@ const MontlyWashType = ({ open, onOpenChange, onNext }: MontlyWashTypeProps) => 
   );
 };
 
-export default MontlyWashType;
+export default MonthlyWashType;

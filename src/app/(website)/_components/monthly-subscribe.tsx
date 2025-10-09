@@ -11,10 +11,6 @@ interface MonthlySubscribeProps {
 
 
 const MonthlySubscribe = ({ open, onOpenChange, onNext }: MonthlySubscribeProps) => {
-//   const handleModal = () => {
-//     setMonthlySelectVehicleOpen(true);
-//     onOpenChange(false);
-//   };
 
   return (
     <div>

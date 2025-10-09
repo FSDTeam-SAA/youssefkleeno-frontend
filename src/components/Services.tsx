@@ -15,14 +15,26 @@ import MonthlySubscribe from "@/app/(website)/_components/monthly-subscribe";
 import MonthlySelectVehicle, {
   Vehicle,
 } from "@/app/(website)/_components/monthly-select-vehicle";
-import MontlyWashType, {
-  Service,
-} from "@/app/(website)/_components/monthly-wash-type";
+import { Service } from "@/app/(website)/_components/monthly-wash-type";
+import MonthlyWashType from "@/app/(website)/_components/monthly-wash-type";
+import MonthlyLocation from "@/app/(website)/_components/monthly-location";
+import MonthlyVehiclePhotos from "@/app/(website)/_components/monthly-vehicle-photos";
 const Services = () => {
   const [monthlySubscribeOpen, setMonthlySubscribeOpen] = useState(false);
   const [monthlySelectVehicleOpen, setMonthlySelectVehicleOpen] =
     useState(false);
   const [monthlyWashTypeOpen, setMonthlyWashTypeOpen] = useState(false);
+  const [locationModalOpen, setLocationModalOpen] = useState(false);
+  const [selectedLocation, setSelectedLocation] = useState("");
+  console.log("Selected Location:", selectedLocation);
+  const [monthlyVehiclePhotosModalOpen, setMonthlyVehiclePhotosModalOpen] =
+    useState(false);
+  const [selectedMonthlyVehiclePhoto, setSelectedMonthlyVehiclePhoto] =
+    useState<{
+      photoName: string;
+      licensePlate: string;
+    } | null>(null);
+  console.log("Selected Vehicle Details:", selectedMonthlyVehiclePhoto);
 
   // ✅ store selected vehicle
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
@@ -195,13 +207,39 @@ const Services = () => {
 
         {/* monthly select wash type modal  */}
         {monthlyWashTypeOpen && (
-          <MontlyWashType
+          <MonthlyWashType
             open={monthlyWashTypeOpen}
             onOpenChange={setMonthlyWashTypeOpen}
             onNext={(service) => {
               setSelectedWashType(service); // store selected wash type
               setMonthlyWashTypeOpen(false);
-              // You can trigger next step/modal here if needed
+              setLocationModalOpen(true);
+            }}
+          />
+        )}
+
+        {/* monthly location modal  */}
+        {locationModalOpen && (
+          <MonthlyLocation
+            open={locationModalOpen}
+            onOpenChange={setLocationModalOpen}
+            onNext={(location) => {
+              setSelectedLocation(location);
+              setLocationModalOpen(false);
+              setMonthlyVehiclePhotosModalOpen(true);
+            }}
+          />
+        )}
+
+        {/* monthly vehicle photos modal */}
+        {monthlyVehiclePhotosModalOpen && (
+          <MonthlyVehiclePhotos
+            open={monthlyVehiclePhotosModalOpen}
+            onOpenChange={setMonthlyVehiclePhotosModalOpen}
+            onNext={(details) => {
+              setSelectedMonthlyVehiclePhoto(details);
+              // Proceed to payment or final submission here
+              console.log("All details collected. Proceed to submit.", details);
             }}
           />
         )}
