@@ -1,47 +1,13 @@
-// "use client";
-// import React, { useState } from "react";
-// import { Dialog, DialogContent } from "@/components/ui/dialog";
-
-// interface MontlyWashTypeProps {
-//   open: boolean;
-//   onOpenChange: (open: boolean) => void;
-//   onNext: (service: Service) => void; // trigger next step on Continue
-// }
-
-// const MonthlyLocation = ({ open, onOpenChange, onNext }: MontlyWashTypeProps) => {
-//   const [selectedServiceObj, setSelectedServiceObj] = useState<Service | null>(null);
 
 
-//   const handleContinue = () => {
-//     if (selectedServiceObj) {
-//       onNext(selectedServiceObj); // send selected service to parent
-//       onOpenChange(false); // close modal
-//     } else {
-//       alert("Please select a wash type first!");
-//     }
-//   };
 
-//   return (
-//     <Dialog open={open} onOpenChange={onOpenChange}>
-//       <DialogContent className="space-y-4">
-//         <h4 className="text-2xl font-semibold text-center">Your Location</h4>
 
-//         <div className="pt-6 pb-4 max-h-[320px] overflow-y-auto">
-       
-//         </div>
 
-//         <button
-//           onClick={handleContinue}
-//           className="w-full h-[55px] bg-[#499FC0] text-white rounded-md"
-//         >
-//           Continue
-//         </button>
-//       </DialogContent>
-//     </Dialog>
-//   );
-// };
 
-// export default MonthlyLocation;
+
+
+
+
 
 
 

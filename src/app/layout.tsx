@@ -4,6 +4,7 @@ import "./globals.css";
 
 import { Toaster } from "sonner";
 import Providers from "@/components/provider/QueryClientProvider";
+import "leaflet/dist/leaflet.css";
 
 const montserrat = Montserrat({
   subsets: ["latin"],
