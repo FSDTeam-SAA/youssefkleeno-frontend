@@ -2,6 +2,7 @@
 import { Button } from "@/components/ui/button"
 import { Menu, X } from "lucide-react"
 import Image from "next/image"
+import Link from "next/link"
 import React, { useState } from "react"
 
 const Navbar = () => {
@@ -14,7 +15,7 @@ const Navbar = () => {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
-            <div className="flex items-center space-x-2">
+            <Link href="/" className="flex items-center space-x-2">
               <div className="flex items-center space-x-2 mb-4">
                 <Image
                   src="/navlogo.png"
@@ -24,7 +25,7 @@ const Navbar = () => {
                   className=""
                 />
               </div>
-            </div>
+            </Link>
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center justify-center flex-1">
