@@ -1,0 +1,111 @@
+"use client";
+import React, { useState } from "react";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { useQuery } from "@tanstack/react-query";
+import Image from "next/image";
+
+export interface ServiceImage {
+  url: string;
+  public_id: string;
+}
+
+export interface Service {
+  _id: string;
+  serviceName: string;
+  price: number;
+  washType: string;
+  serviceImage: ServiceImage;
+  createdAt: string;
+  updatedAt: string;
+  __v: number;
+}
+
+interface ServiceData {
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+  services: Service[];
+}
+
+interface ServiceResponse {
+  success: boolean;
+  message: string;
+  data: ServiceData;
+}
+
+interface MontlyWashTypeProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  onNext: (service: Service) => void; // trigger next step on Continue
+}
+
+const MonthlyWashType = ({ open, onOpenChange, onNext }: MontlyWashTypeProps) => {
+  const [selectedServiceId, setSelectedServiceId] = useState<string>("");
+  const [selectedServiceObj, setSelectedServiceObj] = useState<Service | null>(null);
+
+  const { data } = useQuery<ServiceResponse>({
+    queryKey: ["monthly-wash-type"],
+    queryFn: () =>
+      fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/service?washType=Monthly Subscription`
+      ).then((res) => res.json()),
+  });
+
+  const handleSelect = (service: Service) => {
+    setSelectedServiceId(service._id);
+    setSelectedServiceObj(service);
+  };
+
+  const handleContinue = () => {
+    if (selectedServiceObj) {
+      onNext(selectedServiceObj); // send selected service to parent
+      onOpenChange(false); // close modal
+    } else {
+      alert("Please select a wash type first!");
+    }
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={onOpenChange}>
+      <DialogContent className="space-y-4">
+        <h4 className="text-2xl font-semibold text-center">Select Wash Type</h4>
+
+        <div className="pt-6 pb-4 max-h-[320px] overflow-y-auto">
+          {data?.data?.services?.map((item) => {
+            const isSelected = selectedServiceId === item._id;
+            return (
+              <div
+                key={item._id}
+                onClick={() => handleSelect(item)}
+                className={`flex items-center gap-4 mb-4 cursor-pointer p-4 rounded-md border transition ${
+                  isSelected
+                    ? "border-[#499FC0] bg-[#E5F6FB]"
+                    : "border-gray-200 bg-white"
+                }`}
+              >
+                <Image
+                  src={item.serviceImage.url}
+                  alt={item.serviceName}
+                  width={40}
+                  height={40}
+                  className="object-cover rounded-full"
+                />
+                <h4 className="text-base font-semibold">{item.serviceName}</h4>
+              </div>
+            );
+          })}
+        </div>
+
+        <button
+          onClick={handleContinue}
+          className="w-full h-[55px] bg-[#499FC0] text-white rounded-md"
+        >
+          Continue
+        </button>
+      </DialogContent>
+    </Dialog>
+  );
+};
+
+export default MonthlyWashType;
