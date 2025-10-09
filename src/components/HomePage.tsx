@@ -1,19 +1,40 @@
-
-import { Card, CardContent} from "@/components/ui/card"
+"use client";
+import { Card, CardContent } from "@/components/ui/card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Star  } from "lucide-react"
+import { Star } from "lucide-react"
+import { useQuery } from "@tanstack/react-query";
+import { ReviewResponse } from "@/types/reviews";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./ui/carousel";
+import Image from "next/image";
+import Autoplay from "embla-carousel-autoplay";
+import React from "react";
 
 export default function HomePage() {
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJmZjg3NzIwZmZmYTNiYjA2ZjEyMDYiLCJlbWFpbCI6Im5pbG95QGV4YW1wbGUuY29tIiwiaWF0IjoxNzU5OTA0MDczLCJleHAiOjE3NTk5OTA0NzN9.mn6lRS1vsu-PjKQO0KRFZLAY135W9YRsEVc1R6Z5nCo";
+
+
+  const { data } = useQuery<ReviewResponse>({
+    queryKey: ["get-review-website"],
+    queryFn: () =>
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/get-review-website`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }).then((res) => res.json()),
+  });
+  const reviews = data?.data || [];
+
+  const plugin = React.useRef(
+    Autoplay({
+      delay: 3500,
+      stopOnInteraction: true,
+      stopOnMouseEnter: true,
+    })
+  );
   return (
     <div className="min-h-screen bg-background">
-
-   
-
-  
-
-  
-
- 
       {/* Mobile App Section */}
       {/* <section className="py-16 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -167,87 +188,82 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
       <section className="py-16 lg:py-24">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">What Our Customers Say</h2>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
+              What Our Customers Say
+            </h2>
             <p className="text-lg text-[#2F2F2F] text-[18px] font-midium">
               Don&apos;t just take our word for it - read what satisfied customers have to say
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Testimonial 1 */}
-            <Card>
-              <CardContent className="pt-6">
-                <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-[#2F2F2F] text-[18px] font-midium mb-4">
-                  &apos;I love the convenience of having my car washed at my office. The team is professional and my car
-                  always looks amazing!&apos;
-                </p>
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-semibold">
-                    S
-                  </div>
-                  <div>
-                    <p className="font-semibold">Sarah Johnson</p>
-                    <p className="text-sm text-gray-500">Business Owner</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+          {/* ShadCN Carousel Slider */}
+          <Carousel
+            opts={{
+              align: "start",
+              loop: true,
+            }}
+            plugins={[plugin.current]}
+            className="w-full"
+          >
+            <CarouselContent className="-ml-2 sm:-ml-4">
+              {reviews.length > 0 ? (
+                reviews.map((item) =>
+                  item.review.map((rev) => (
+                    <CarouselItem
+                      key={rev._id}
+                      className="pl-2 sm:pl-4 sm:basis-1/2 lg:basis-1/3"
+                    >
+                      <Card>
+                        <CardContent className="pt-6">
+                          <div className="flex mb-4">
+                            {[...Array(rev.rating)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                              />
+                            ))}
+                            {[...Array(5 - rev.rating)].map((_, i) => (
+                              <Star key={i} className="w-5 h-5 text-gray-300" />
+                            ))}
+                          </div>
+                          <p className="text-[#2F2F2F] text-[18px] font-midium mb-4">
+                            &apos;{rev.text}&apos;
+                          </p>
+                          <div className="flex items-center space-x-3">
+                            {rev.user?.avatar?.url ? (
+                              <Image
+                                src={rev.user.avatar.url}
+                                alt={rev.user.name}
+                                width={40}
+                                height={40}
+                                className="w-10 h-10 rounded-full object-cover"
+                              />
+                            ) : (
+                              <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-semibold">
+                                {rev.user?.name?.charAt(0) || "U"}
+                              </div>
+                            )}
+                            <div>
+                              <p className="font-semibold">{rev.user?.name}</p>
+                              <p className="text-sm text-gray-500">Customer</p>
+                            </div>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </CarouselItem>
+                  ))
+                )
+              ) : (
+                <p className="text-center text-gray-500 w-full">No reviews found</p>
+              )}
+            </CarouselContent>
 
-            {/* Testimonial 2 */}
-            <Card>
-              <CardContent className="pt-6">
-                <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-[#2F2F2F] text-[18px] font-midium mb-4">
-                  &apos;The monthly subscription is perfect for my busy lifestyle. Great service and competitive pricing!&apos;
-                </p>
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-green-500 rounded-full flex items-center justify-center text-white font-semibold">
-                    M
-                  </div>
-                  <div>
-                    <p className="font-semibold">Mike Chen</p>
-                    <p className="text-sm text-gray-500">Software Engineer</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Testimonial 3 */}
-            <Card className="sm:col-span-2 lg:col-span-1">
-              <CardContent className="pt-6">
-                <div className="flex mb-4">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 fill-yellow-400 text-yellow-400" />
-                  ))}
-                </div>
-                <p className="text-[#2F2F2F] text-[18px] font-midium mb-4">
-                  &apos;Eco-friendly dry wash is amazing! My car looks great and I feel good about helping the environment.&apos;
-                </p>
-                <div className="flex items-center space-x-3">
-                  <div className="w-10 h-10 bg-purple-500 rounded-full flex items-center justify-center text-white font-semibold">
-                    E
-                  </div>
-                  <div>
-                    <p className="font-semibold">Emily Rodriguez</p>
-                    <p className="text-sm text-gray-500">Teacher</p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
+            <CarouselPrevious />
+            <CarouselNext />
+          </Carousel>
         </div>
       </section>
 

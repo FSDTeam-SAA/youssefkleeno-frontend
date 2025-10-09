@@ -16,9 +16,7 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
-// import { useSession } from "next-auth/react";
 
-// ✅ Zod schema with validation rules
 const formSchema = z.object({
   rating: z.number().min(1, { message: "Please rate us!" }),
   text: z
@@ -30,10 +28,8 @@ const formSchema = z.object({
 type FormValues = z.infer<typeof formSchema>;
 
 export default function ShareExperienceForm() {
-  //   const session = useSession();
-  //   const token = (session?.data?.user as { accessToken: string })?.accessToken;
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJmZjg3NzIwZmZmYTNiYjA2ZjEyMDYiLCJlbWFpbCI6Im5pbG95QGV4YW1wbGUuY29tIiwiaWF0IjoxNzU5OTA0MDczLCJleHAiOjE3NTk5OTA0NzN9.mn6lRS1vsu-PjKQO0KRFZLAY135W9YRsEVc1R6Z5nCo";
+
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJmZjg3NzIwZmZmYTNiYjA2ZjEyMDYiLCJlbWFpbCI6Im5pbG95QGV4YW1wbGUuY29tIiwiaWF0IjoxNzU5OTA0MDczLCJleHAiOjE3NTk5OTA0NzN9.mn6lRS1vsu-PjKQO0KRFZLAY135W9YRsEVc1R6Z5nCo";
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -42,26 +38,26 @@ export default function ShareExperienceForm() {
     },
   });
 
-    const { mutate, isPending } = useMutation({
-      mutationKey: ["share-your-exprience"],
-      mutationFn: (values: FormValues) =>
-        fetch(`${process.env.NEXT_PUBLIC_API_URL}/write-review-website`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(values),
-        }).then((res) => res.json()),
-      onSuccess: (data) => {
-        if (!data?.success) {
-          toast.error(data?.message || "Something went wrong");
-          return;
-        }
-        toast.success(data?.message || "Password Change successfully!");
-        form.reset();
-      },
-    });
+  const { mutate, isPending } = useMutation({
+    mutationKey: ["share-your-exprience"],
+    mutationFn: (values: FormValues) =>
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/write-review-website`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(values),
+      }).then((res) => res.json()),
+    onSuccess: (data) => {
+      if (!data?.success) {
+        toast.error(data?.message || "Something went wrong");
+        return;
+      }
+      toast.success(data?.message || "Password Change successfully!");
+      form.reset();
+    },
+  });
 
   const onSubmit = (values: FormValues) => {
     console.log("Submitted Data:", values);
@@ -119,11 +115,10 @@ export default function ShareExperienceForm() {
                             className="transition-colors duration-150"
                           >
                             <Star
-                              className={`h-6 w-6 ${
-                                isActive
-                                  ? "fill-[#FACC15] text-[#FACC15]"
-                                  : "text-[#FACC15] hover:text-[#FACC15]/90"
-                              }`}
+                              className={`h-6 w-6 ${isActive
+                                ? "fill-[#FACC15] text-[#FACC15]"
+                                : "text-[#FACC15] hover:text-[#FACC15]/90"
+                                }`}
                             />
                           </button>
                         );
@@ -133,7 +128,7 @@ export default function ShareExperienceForm() {
                       </span>
                     </div>
                   </FormControl>
-                  <FormMessage className="text-red-500"/>
+                  <FormMessage className="text-red-500" />
                 </FormItem>
               )}
             />
@@ -157,7 +152,7 @@ export default function ShareExperienceForm() {
                   <p className="text-xs text-gray-500">
                     {field.value.length}/200 characters
                   </p>{" "}
-                  <FormMessage className="text-red-500"/>
+                  <FormMessage className="text-red-500" />
                 </FormItem>
               )}
             />
@@ -167,7 +162,7 @@ export default function ShareExperienceForm() {
                 className="my-5 h-[51px] bg-[#499FC0] rounded-[8px] text-[#F4F4F4] text-base font-medium leading-[120%] py-4 px-[47px]"
                 type="submit"
               >
-                {isPending ? "Saving...." :  "Save"}
+                {isPending ? "Saving...." : "Save"}
               </Button>
             </div>
           </form>
