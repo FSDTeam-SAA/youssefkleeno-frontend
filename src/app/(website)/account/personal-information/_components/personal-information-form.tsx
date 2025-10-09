@@ -33,9 +33,12 @@ const formSchema = z.object({
     .trim()
     .min(1, { message: "Email is required." })
     .email({ message: "Please enter a valid email address." }),
-  phoneNumber: z
-    .string()
-    .regex(/^\+?[0-9]{10,15}$/, { message: "Enter a valid phone number." }),
+  phoneNumber: z.string().min(10, {
+    message: "Phone Number must be at least 10 characters.",
+  }),
+  // phoneNumber: z
+  //   .string()
+  //   .regex(/^\+?[0-9]{10,15}$/, { message: "Enter a valid phone number." }),
   city: z.string().min(2, {
     message: "City must be at least 2 characters.",
   }),
@@ -63,6 +66,7 @@ export interface ProfileResponse {
     };
     _id: string;
     name: string;
+    dob: string;
     email: string;
     lastActive: string;
     createdAt: string;
@@ -115,7 +119,7 @@ const PersonalInformationForm = () => {
         name: data?.data?.name,
         email: data?.data?.email,
         phoneNumber: data?.data?.phone,
-        dob: new Date(data?.data?.lastActive),
+        dob: new Date(data?.data?.dob),
         city: data?.data?.city,
         state: data?.data?.state,
         zipCode: data?.data?.zip,
@@ -149,7 +153,7 @@ const PersonalInformationForm = () => {
     formData.append("state", values.state);
     formData.append("zip", values.zipCode);
     formData.append("street", values.street);
-    formData.append("lastActive", values.dob.toString());
+    formData.append("dob", values.dob.toString());
     mutate(formData);
   }
   return (
