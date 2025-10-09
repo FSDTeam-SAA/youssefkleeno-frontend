@@ -27,6 +27,7 @@ export interface ProfileResponse {
     state: string;
     street: string;
     zip: string;
+    dob: string;
   };
 }
 

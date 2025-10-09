@@ -14,14 +14,14 @@ import {
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
-// import { useMutation } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
+import { toast } from "sonner";
 // import { useSession } from "next-auth/react";
-// import { toast } from "sonner";
 
 // ✅ Zod schema with validation rules
 const formSchema = z.object({
   rating: z.number().min(1, { message: "Please rate us!" }),
-  description: z
+  text: z
     .string()
     .min(10, { message: "Description must be at least 10 characters." })
     .max(500),
@@ -32,38 +32,40 @@ type FormValues = z.infer<typeof formSchema>;
 export default function ShareExperienceForm() {
   //   const session = useSession();
   //   const token = (session?.data?.user as { accessToken: string })?.accessToken;
-
+  const token =
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2OGJmZjg3NzIwZmZmYTNiYjA2ZjEyMDYiLCJlbWFpbCI6Im5pbG95QGV4YW1wbGUuY29tIiwiaWF0IjoxNzU5OTA0MDczLCJleHAiOjE3NTk5OTA0NzN9.mn6lRS1vsu-PjKQO0KRFZLAY135W9YRsEVc1R6Z5nCo";
   const form = useForm<FormValues>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       rating: 0,
-      description: "",
+      text: "",
     },
   });
 
-  //   const { mutate, isPending } = useMutation({
-  //     mutationKey: ["changePassword"],
-  //     mutationFn: (values: { currentPassword: string; newPassword: string }) =>
-  //       fetch(`${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/change-password`, {
-  //         method: "POST",
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //           //   Authorization: `Bearer ${token}`,
-  //         },
-  //         body: JSON.stringify(values),
-  //       }).then((res) => res.json()),
-  //     onSuccess: (data) => {
-  //       if (!data?.success) {
-  //         toast.error(data?.message || "Something went wrong");
-  //         return;
-  //       }
-  //       toast.success(data?.message || "Password Change successfully!");
-  //       form.reset();
-  //     },
-  //   });
+    const { mutate, isPending } = useMutation({
+      mutationKey: ["share-your-exprience"],
+      mutationFn: (values: FormValues) =>
+        fetch(`${process.env.NEXT_PUBLIC_API_URL}/write-review-website`, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+              Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify(values),
+        }).then((res) => res.json()),
+      onSuccess: (data) => {
+        if (!data?.success) {
+          toast.error(data?.message || "Something went wrong");
+          return;
+        }
+        toast.success(data?.message || "Password Change successfully!");
+        form.reset();
+      },
+    });
 
   const onSubmit = (values: FormValues) => {
     console.log("Submitted Data:", values);
+    mutate(values);
   };
 
   const getRatingText = (stars: number) => {
@@ -139,7 +141,7 @@ export default function ShareExperienceForm() {
             {/* Description Field */}
             <FormField
               control={form.control}
-              name="description"
+              name="text"
               render={({ field }) => (
                 <FormItem>
                   <FormLabel className="text-base font-medium text-[#333333] leading-[120%]">
@@ -161,10 +163,11 @@ export default function ShareExperienceForm() {
             />
             <div className="flex items-center justify-center pt-1">
               <Button
+                disabled={isPending}
                 className="my-5 h-[51px] bg-[#499FC0] rounded-[8px] text-[#F4F4F4] text-base font-medium leading-[120%] py-4 px-[47px]"
                 type="submit"
               >
-                Save
+                {isPending ? "Saving...." :  "Save"}
               </Button>
             </div>
           </form>
