@@ -1,11 +1,12 @@
-import React from 'react'
+import React from "react";
+import BookingContainer from "./_components/booking-container";
 
 const MyBookingsPage = () => {
   return (
     <div>
-      my bookings page
+      <BookingContainer />
     </div>
-  )
-}
+  );
+};
 
-export default MyBookingsPage
+export default MyBookingsPage;

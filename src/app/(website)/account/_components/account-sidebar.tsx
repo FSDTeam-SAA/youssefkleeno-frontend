@@ -6,10 +6,11 @@ import {
   ShoppingCart,
   User,
 } from "lucide-react";
-import Image from "next/image";
+// import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
+import PersonalInfoAvata from "./personal-info-avata";
 
 const AccountSidebar = () => {
   const pathName = usePathname();
@@ -42,12 +43,16 @@ const AccountSidebar = () => {
   ];
   return (
     <div className="bg-white rounded-[6px] shadow-[0px_2px_8px_0px_#00000029]">
-      <div className="flex items-center gap-3 py-6 md:py-7 lg:py-8 px-4 md:px-5 lg:px-6 border-b border-[#0000001A]">
+      {/* <div className="flex items-center gap-3 py-6 md:py-7 lg:py-8 px-4 md:px-5 lg:px-6 border-b border-[#0000001A]">
         <Image src="/profiles.jpg" width={100} height={100} alt="profile" className="w-[80px] h-[80px] object-cover rounded-full"/>
         <div>
             <h3 className="text-xl font-medium leading-[120%] text-[#111827]">John Smith</h3>
             <p className="text-base font-normal leading-[120%] text-[#282828] pt-3">john.smith@example.com</p>
         </div>
+      </div> */}
+      <div>
+        <PersonalInfoAvata/>
+
       </div>
       <div className="flex flex-col gap-5 py-6 md:py-7 lg:py-8 px-4 md:px-5 lg:px-6">
         {sidebarItems?.map((item) => (
