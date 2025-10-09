@@ -2,20 +2,19 @@
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Check } from "lucide-react";
 
-const MonthlySubscribe = ({
-  open,
-  onOpenChange,
-  setMonthlySelectVehicleOpen,
-}: {
+
+interface MonthlySubscribeProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  monthlySelectVehicleOpen: boolean;
-  setMonthlySelectVehicleOpen: (monthlySelectVehicleOpen: boolean) => void;
-}) => {
-  const handleModal = () => {
-    setMonthlySelectVehicleOpen(true);
-    onOpenChange(false);
-  };
+  onNext: () => void;
+}
+
+
+const MonthlySubscribe = ({ open, onOpenChange, onNext }: MonthlySubscribeProps) => {
+//   const handleModal = () => {
+//     setMonthlySelectVehicleOpen(true);
+//     onOpenChange(false);
+//   };
 
   return (
     <div>
@@ -51,7 +50,7 @@ const MonthlySubscribe = ({
 
           <div>
             <button
-              onClick={handleModal}
+              onClick={onNext}
               className="w-full h-[65px] text-base font-medium text-white leading-[120%] bg-[#499FC0] rounded-[6px] py-[23px] px-[50px]"
             >
               Subscribe Now

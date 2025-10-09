@@ -12,20 +12,27 @@ import {
 import { CheckCircle, Droplets, Calendar, Zap, Car } from "lucide-react";
 import { Button } from "./ui/button";
 import MonthlySubscribe from "@/app/(website)/_components/monthly-subscribe";
-import MonthlySelectVehicle, { Vehicle } from "@/app/(website)/_components/monthly-select-vehicle";
+import MonthlySelectVehicle, {
+  Vehicle,
+} from "@/app/(website)/_components/monthly-select-vehicle";
+import MontlyWashType, {
+  Service,
+} from "@/app/(website)/_components/monthly-wash-type";
 const Services = () => {
   const [monthlySubscribeOpen, setMonthlySubscribeOpen] = useState(false);
-  const [monthlySelectVehicleOpen, setMonthlySelectVehicleOpen] = useState(false);
+  const [monthlySelectVehicleOpen, setMonthlySelectVehicleOpen] =
+    useState(false);
+  const [monthlyWashTypeOpen, setMonthlyWashTypeOpen] = useState(false);
 
-   // ✅ store selected vehicle
+  // ✅ store selected vehicle
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
-  console.log("🚗 Selected Vehicle:", selectedVehicle);
+  console.log("Selected Vehicle item:", selectedVehicle);
 
-  const handleVehicleSelect = (vehicle: Vehicle) => {
-    setSelectedVehicle(vehicle);
-    console.log("✅ Vehicle selected:", vehicle);
-  };
-
+  // store select wash type
+  const [selectedWashType, setSelectedWashType] = useState<Service | null>(
+    null
+  );
+  console.log("Selected Wash Type:", selectedWashType);
 
   return (
     <div>
@@ -164,16 +171,39 @@ const Services = () => {
       <>
         {monthlySubscribeOpen && (
           <MonthlySubscribe
-          open={monthlySubscribeOpen}
-          onOpenChange={setMonthlySubscribeOpen}
-          monthlySelectVehicleOpen={monthlySelectVehicleOpen}
-          setMonthlySelectVehicleOpen={setMonthlySelectVehicleOpen}
-
+            open={monthlySubscribeOpen}
+            onOpenChange={setMonthlySubscribeOpen}
+            onNext={() => {
+              setMonthlySubscribeOpen(false);
+              setMonthlySelectVehicleOpen(true);
+            }}
           />
         )}
 
+        {/* monthly select vehicle modal  */}
         {monthlySelectVehicleOpen && (
-          <MonthlySelectVehicle open={monthlySelectVehicleOpen} onOpenChange={setMonthlySelectVehicleOpen}  onSelect={handleVehicleSelect}/>
+          <MonthlySelectVehicle
+            open={monthlySelectVehicleOpen}
+            onOpenChange={setMonthlySelectVehicleOpen}
+            onNext={(vehicle) => {
+              setSelectedVehicle(vehicle); // store vehicle
+              setMonthlySelectVehicleOpen(false);
+              setMonthlyWashTypeOpen(true); // open wash type modal only after Continue
+            }}
+          />
+        )}
+
+        {/* monthly select wash type modal  */}
+        {monthlyWashTypeOpen && (
+          <MontlyWashType
+            open={monthlyWashTypeOpen}
+            onOpenChange={setMonthlyWashTypeOpen}
+            onNext={(service) => {
+              setSelectedWashType(service); // store selected wash type
+              setMonthlyWashTypeOpen(false);
+              // You can trigger next step/modal here if needed
+            }}
+          />
         )}
       </>
     </div>

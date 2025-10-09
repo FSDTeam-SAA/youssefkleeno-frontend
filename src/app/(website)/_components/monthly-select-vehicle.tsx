@@ -143,15 +143,17 @@ export interface VehicleResponse {
 interface MonthlySelectVehicleProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
-  onSelect: (vehicle: Vehicle) => void; // ✅ new prop
+ onNext: (vehicle: Vehicle) => void;
 }
 
 const MonthlySelectVehicle = ({
   open,
   onOpenChange,
-  onSelect,
+  onNext,
 }: MonthlySelectVehicleProps) => {
   const [selectedVehicleId, setSelectedVehicleId] = useState<string>("");
+   const [selectedVehicleObj, setSelectedVehicleObj] = useState<Vehicle | null>(null);
+
 
   const { data } = useQuery<VehicleResponse>({
     queryKey: ["vehicles"],
@@ -163,8 +165,15 @@ const MonthlySelectVehicle = ({
 
   const handleSelect = (vehicle: Vehicle) => {
     setSelectedVehicleId(vehicle._id);
-    onSelect(vehicle); // ✅ send selected vehicle back to parent
-    // onOpenChange(false); // ✅ close modal after selection
+setSelectedVehicleObj(vehicle); 
+  };
+
+    const handleContinue = () => {
+    if (selectedVehicleObj) {
+      onNext(selectedVehicleObj); // pass vehicle to parent
+    } else {
+      alert("Please select a vehicle first!");
+    }
   };
 
   return (
@@ -206,7 +215,7 @@ const MonthlySelectVehicle = ({
 
         <button
           className="w-full h-[55px] text-base font-medium text-white bg-[#499FC0] rounded-[6px]"
-          onClick={() => onOpenChange(false)}
+          onClick={handleContinue}
         >
           Continue
         </button>
