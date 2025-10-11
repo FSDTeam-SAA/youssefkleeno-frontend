@@ -69,8 +69,12 @@ const MonthlySelectDate = ({
         .filter(Boolean);
       if (slots.length === 0) throw new Error("No time slots available");
       return slots;
-    } catch (err: any) {
-      toast.error(err.message || "Failed to fetch slots");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        toast.error(err.message || "Failed to fetch slots");
+      } else {
+        toast.error("Failed to fetch slots");
+      }
       return [];
     }
   };
@@ -116,7 +120,7 @@ const MonthlySelectDate = ({
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="space-y-4">
+      <DialogContent className="space-y-1">
         <h4 className="text-2xl font-semibold text-center">Select 4 Dates</h4>
         <div className="border border-gray-300 rounded-md p-4">
           <div className="grid grid-cols-7 gap-1 text-center mb-2">
@@ -158,7 +162,7 @@ const MonthlySelectDate = ({
           </div>
         </div>
         {selectedDates.length > 0 && (
-          <div className="space-y-4">
+          <div className="space-y-3 ">
             {selectedDates.map((dateObj, index) => (
               <div key={index} className="border border-gray-300 p-2 rounded-md">
                 <p className="text-sm font-medium">
@@ -183,7 +187,7 @@ const MonthlySelectDate = ({
                     No time slots available for this date
                   </p>
                 )}
-                <div className="mt-4 mb-2">
+                <div className="mt-3 mb-1">
                   <div className="flex items-center space-x-2">
                     <Checkbox
                       id={`steam-wash-${index}`}

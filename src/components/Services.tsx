@@ -25,6 +25,11 @@ import { toast } from "sonner";
 import MonthlySelectDate, { SelectedDate } from "@/app/(website)/_components/text";
 import { useMutation } from "@tanstack/react-query";
 
+interface MyError {
+  message: string;
+  // add any other properties you expect the error object to have
+}
+
 const Services = () => {
   const userId = `68bff87720fffa3bb06f1206`;
 
@@ -87,7 +92,7 @@ const { mutate } = useMutation({
     setPaymentDiscountModalOpen(true);
     setBookingId(data?.data?._id);
   },
-  onError: (error: any) => {
+  onError: (error: MyError) => {
     toast.error(error.message || "Booking failed!");
   },
 });
