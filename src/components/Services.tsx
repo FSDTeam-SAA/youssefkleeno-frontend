@@ -24,7 +24,7 @@ import { Service } from "@/app/(website)/_components/monthly-wash-type";
 import MonthlyWashType from "@/app/(website)/_components/monthly-wash-type";
 import MonthlyLocation from "@/app/(website)/_components/monthly-location";
 import MonthlyVehiclePhotos from "@/app/(website)/_components/monthly-vehicle-photos";
-import MonthlySelectDate from "@/app/(website)/_components/monthly-select-date";
+import MonthlySelectDate from "@/app/(website)/_components/text";
 const Services = () => {
   const [monthlySubscribeOpen, setMonthlySubscribeOpen] = useState(false);
   const [monthlySelectVehicleOpen, setMonthlySelectVehicleOpen] =
@@ -54,7 +54,9 @@ const Services = () => {
   const [selectedWashType, setSelectedWashType] = useState<Service | null>(
     null
   );
-  console.log("Selected Wash Type:", selectedWashType);
+
+  const washtypeId = selectedWashType?._id;
+  console.log("Selected Wash Type:", selectedWashType, washtypeId);
 
   return (
     <div>
@@ -258,6 +260,7 @@ const Services = () => {
           <MonthlySelectDate
             open={dateSelectionModalOpen}
             onOpenChange={setDateSelectionModalOpen}
+            washtypeId={washtypeId || ""}
             onNext={(selectedDates) => {
               // setSelectedDates(selectedDates);
               // Proceed to payment or final submission here
