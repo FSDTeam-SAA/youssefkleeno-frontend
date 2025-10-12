@@ -11,7 +11,6 @@ import { CheckCircle, Droplets, Calendar, Car } from "lucide-react";
 import { Button } from "./ui/button";
 import { Vehicle } from "@/app/(website)/_components/monthly-select-vehicle";
 import { Service } from "@/app/(website)/_components/monthly-wash-type";
-import MonthlyVehiclePhotos from "@/app/(website)/_components/monthly-vehicle-photos";
 import MonthlyPaymentDiscount from "@/app/(website)/_components/monthly-payment-discount";
 import { toast } from "sonner";
 import { SelectedDate } from "@/app/(website)/_components/text";
@@ -21,6 +20,7 @@ import MonthlySelectDate from "@/app/(website)/_components/monthly-select-date";
 import Loader from "./Loader";
 import OneTimeSelectVehicle from "@/app/(website)/_components/one-time-select-vehicle";
 import OneTimeWashType from "@/app/(website)/_components/one-time-wash-type";
+import OneTimeVehiclePhotos from "@/app/(website)/_components/one-time-vehicle-photo";
 
 const OneTimeLocation = dynamic(
   () => import("@/app/(website)/_components/one-time-location"),
@@ -45,7 +45,7 @@ const OneTimeService = () => {
     useState(false);
   const [oneTimeWashTypeOpen, setOneTimeWashTypeOpen] = useState(false);
   const [locationModalOpen, setLocationModalOpen] = useState(false);
-  const [monthlyVehiclePhotosModalOpen, setMonthlyVehiclePhotosModalOpen] =
+  const [oneTimeVehiclePhotosModalOpen, setOneTimeVehiclePhotosModalOpen] =
     useState(false);
   const [dateSelectionModalOpen, setDateSelectionModalOpen] = useState(false);
   const [paymentDiscountModalOpen, setPaymentDiscountModalOpen] =
@@ -224,18 +224,18 @@ const OneTimeService = () => {
             onNext={(location) => {
               setSelectedLocation(location);
               setLocationModalOpen(false);
-              setMonthlyVehiclePhotosModalOpen(true);
+              setOneTimeVehiclePhotosModalOpen(true);
             }}
           />
         )}
 
-        {monthlyVehiclePhotosModalOpen && (
-          <MonthlyVehiclePhotos
-            open={monthlyVehiclePhotosModalOpen}
-            onOpenChange={setMonthlyVehiclePhotosModalOpen}
+        {oneTimeVehiclePhotosModalOpen && (
+          <OneTimeVehiclePhotos
+            open={oneTimeVehiclePhotosModalOpen}
+            onOpenChange={setOneTimeVehiclePhotosModalOpen}
             onNext={(details) => {
               setSelectedMonthlyVehiclePhoto(details);
-              setMonthlyVehiclePhotosModalOpen(false);
+              setOneTimeVehiclePhotosModalOpen(false);
               setDateSelectionModalOpen(true);
             }}
           />
