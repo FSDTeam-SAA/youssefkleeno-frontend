@@ -1,6 +1,8 @@
 import { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import "./globals.css";
+import 'leaflet/dist/leaflet.css';
+import '../styles/leaflet.css'; 
 
 import { Toaster } from "sonner";
 import Providers from "@/components/provider/QueryClientProvider";
