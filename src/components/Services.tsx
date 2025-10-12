@@ -1,6 +1,3 @@
-
-
-
 "use client";
 import React, { useState } from "react";
 import {
@@ -18,91 +15,123 @@ import MonthlySelectVehicle, {
 } from "@/app/(website)/_components/monthly-select-vehicle";
 import { Service } from "@/app/(website)/_components/monthly-wash-type";
 import MonthlyWashType from "@/app/(website)/_components/monthly-wash-type";
-import MonthlyLocation from "@/app/(website)/_components/monthly-location";
 import MonthlyVehiclePhotos from "@/app/(website)/_components/monthly-vehicle-photos";
 import MonthlyPaymentDiscount from "@/app/(website)/_components/monthly-payment-discount";
 import { toast } from "sonner";
-import MonthlySelectDate, { SelectedDate } from "@/app/(website)/_components/text";
+import MonthlySelectDate, {
+  SelectedDate,
+} from "@/app/(website)/_components/text";
 import { useMutation } from "@tanstack/react-query";
+import dynamic from "next/dynamic";
+
+const MonthlyLocation = dynamic(
+  () => import("@/app/(website)/_components/monthly-location"),
+  {
+    ssr: false,
+  }
+);
 
 interface MyError {
   message: string;
   // add any other properties you expect the error object to have
 }
 
+// ✅ Default map position
+const defaultPosition: [number, number] = [51.505, -0.09];
+
 const Services = () => {
   const userId = `68bff87720fffa3bb06f1206`;
 
   // Step modals state
   const [monthlySubscribeOpen, setMonthlySubscribeOpen] = useState(false);
-  const [monthlySelectVehicleOpen, setMonthlySelectVehicleOpen] = useState(false);
+  const [monthlySelectVehicleOpen, setMonthlySelectVehicleOpen] =
+    useState(false);
   const [monthlyWashTypeOpen, setMonthlyWashTypeOpen] = useState(false);
   const [locationModalOpen, setLocationModalOpen] = useState(false);
-  const [monthlyVehiclePhotosModalOpen, setMonthlyVehiclePhotosModalOpen] = useState(false);
+  const [monthlyVehiclePhotosModalOpen, setMonthlyVehiclePhotosModalOpen] =
+    useState(false);
   const [dateSelectionModalOpen, setDateSelectionModalOpen] = useState(false);
-  const [paymentDiscountModalOpen, setPaymentDiscountModalOpen] = useState(false);
-  const [bookingId, setBookingId] = useState("");
+  const [paymentDiscountModalOpen, setPaymentDiscountModalOpen] =
+    useState(false);
 
   // Selected data state
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
-  const [selectedWashType, setSelectedWashType] = useState<Service | null>(null);
-  const [selectedMonthlyVehiclePhoto, setSelectedMonthlyVehiclePhoto] = useState<{
-    photo: string | File;
-    licensePlate: string;
-  } | null>(null);
+  const [selectedWashType, setSelectedWashType] = useState<Service | null>(
+    null
+  );
+  const [selectedMonthlyVehiclePhoto, setSelectedMonthlyVehiclePhoto] =
+    useState<{
+      photo: string | File;
+      licensePlate: string;
+    } | null>(null);
   console.log("Selected Vehicle Details:", selectedMonthlyVehiclePhoto);
   const [selectedDates, setSelectedDates] = useState<SelectedDate[]>([]);
+    // ✅ Position state lifted up here
+  const [position, setPosition] = useState<[number, number]>(defaultPosition);
+
+  console.log(position)
   const washtypeId = selectedWashType?._id;
+  const [bookingId, setBookingId] = useState("");
+  console.log("select location", selectedLocation)
 
   // ✅ Booking API mutation
-const { mutate } = useMutation({
-  mutationKey: ["create-booking"],
-  mutationFn: async () => {
-    const formData = new FormData();
-    formData.append("user", userId);
-    formData.append("bookingType", "subscription");
-    formData.append("licensePlate", selectedMonthlyVehiclePhoto?.licensePlate || "");
-    formData.append("vehicle", selectedVehicle?._id || "");
-    formData.append("location", JSON.stringify({ address: "welkj", lat: 3222, lng: 3232 }));
-    formData.append("dates", JSON.stringify(
-      selectedDates.map((d) => ({
-        date: d.date,
-        slot: d.timeSlot,
-        wash_type: d.steamWash ? washtypeId : null,
-      }))
-    ));
+  const { mutate } = useMutation({
+    mutationKey: ["create-booking"],
+    mutationFn: async () => {
+      const formData = new FormData();
+      formData.append("user", userId);
+      formData.append("bookingType", "subscription");
+      formData.append(
+        "licensePlate",
+        selectedMonthlyVehiclePhoto?.licensePlate || ""
+      );
+      formData.append("vehicle", selectedVehicle?._id || "");
+      formData.append(
+        "location",
+        JSON.stringify({ address: selectedLocation, lat: position[0], lng: position[1] })
+      );
+      formData.append(
+        "dates",
+        JSON.stringify(
+          selectedDates.map((d) => ({
+            date: d.date,
+            slot: d.timeSlot,
+            wash_type: d.steamWash ? washtypeId : null,
+          }))
+        )
+      );
 
-    // ✅ Add binary file
-    if (selectedMonthlyVehiclePhoto?.photo) {
-      formData.append("car", selectedMonthlyVehiclePhoto.photo);
-    }
+      // ✅ Add binary file
+      if (selectedMonthlyVehiclePhoto?.photo) {
+        formData.append("car", selectedMonthlyVehiclePhoto.photo);
+      }
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/booking`, {
-      method: "POST",
-      body: formData, // ✅ send binary safely
-    });
+      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/booking`, {
+        method: "POST",
+        body: formData, // ✅ send binary safely
+      });
 
-    if (!res.ok) throw new Error("Failed to create booking");
-    return res.json();
-  },
-  onSuccess: (data) => {
-    toast.success("Booking created successfully!");
-    setDateSelectionModalOpen(false);
-    setPaymentDiscountModalOpen(true);
-    setBookingId(data?.data?._id);
-  },
-  onError: (error: MyError) => {
-    toast.error(error.message || "Booking failed!");
-  },
-});
-
+      if (!res.ok) throw new Error("Failed to create booking");
+      return res.json();
+    },
+    onSuccess: (data) => {
+      toast.success("Booking created successfully!");
+      setDateSelectionModalOpen(false);
+      setPaymentDiscountModalOpen(true);
+      setBookingId(data?.data?._id);
+    },
+    onError: (error: MyError) => {
+      toast.error(error.message || "Booking failed!");
+    },
+  });
 
   const handleContinue = (selectedDatesFromModal: SelectedDate[]) => {
     if (!selectedVehicle) return toast.error("Please select a vehicle!");
     if (!selectedWashType) return toast.error("Please select a wash type!");
     if (!selectedLocation) return toast.error("Please enter a location!");
-    if (!selectedMonthlyVehiclePhoto) return toast.error("Please upload vehicle photos!");
+    if (!selectedMonthlyVehiclePhoto)
+      return toast.error("Please upload vehicle photos!");
     if (selectedDatesFromModal.length !== 4)
       return toast.error("Please select exactly 4 dates!");
 
@@ -143,7 +172,8 @@ const { mutate } = useMutation({
                   </CardTitle>
                 </div>
                 <CardDescription className="text-base text-[#2F2F2F] mt-1">
-                  Save money with our monthly plan. Get 4 washes per month, one each week.
+                  Save money with our monthly plan. Get 4 washes per month, one
+                  each week.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -255,8 +285,10 @@ const { mutate } = useMutation({
 
         {locationModalOpen && (
           <MonthlyLocation
-            open={locationModalOpen}
+             open={locationModalOpen}
             onOpenChange={setLocationModalOpen}
+            position={position}
+            setPosition={setPosition}
             onNext={(location) => {
               setSelectedLocation(location);
               setLocationModalOpen(false);
@@ -300,10 +332,6 @@ const { mutate } = useMutation({
 };
 
 export default Services;
-
-
-
-
 
 // "use client";
 // import React, { useState } from "react";
@@ -573,7 +601,7 @@ export default Services;
 //               // Proceed to payment or final submission here
 //               console.log("Dates selected. Proceed to payment.", selectedDates);
 //             }}
-            
+
 //           />
 //         )}
 //       </>

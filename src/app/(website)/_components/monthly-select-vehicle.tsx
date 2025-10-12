@@ -74,7 +74,7 @@ setSelectedVehicleObj(vehicle);
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="space-y-0 gap-0">
-        <h4 className="text-2xl font-semibold text-black text-center">
+        <h4 className="text-xl md:text-2xl font-semibold text-black text-center">
           Select Your Vehicle
         </h4>
 
