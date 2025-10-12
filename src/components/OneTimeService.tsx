@@ -11,7 +11,6 @@ import { CheckCircle, Droplets, Calendar, Car } from "lucide-react";
 import { Button } from "./ui/button";
 import { Vehicle } from "@/app/(website)/_components/monthly-select-vehicle";
 import { Service } from "@/app/(website)/_components/monthly-wash-type";
-import MonthlyWashType from "@/app/(website)/_components/monthly-wash-type";
 import MonthlyVehiclePhotos from "@/app/(website)/_components/monthly-vehicle-photos";
 import MonthlyPaymentDiscount from "@/app/(website)/_components/monthly-payment-discount";
 import { toast } from "sonner";
@@ -21,9 +20,10 @@ import dynamic from "next/dynamic";
 import MonthlySelectDate from "@/app/(website)/_components/monthly-select-date";
 import Loader from "./Loader";
 import OneTimeSelectVehicle from "@/app/(website)/_components/one-time-select-vehicle";
+import OneTimeWashType from "@/app/(website)/_components/one-time-wash-type";
 
-const MonthlyLocation = dynamic(
-  () => import("@/app/(website)/_components/monthly-location"),
+const OneTimeLocation = dynamic(
+  () => import("@/app/(website)/_components/one-time-location"),
   {
     ssr: false,
   }
@@ -43,7 +43,7 @@ const OneTimeService = () => {
   // Step modals state
   const [oneTimeSelectVehicleOpen, setOneTimeSelectVehicleOpen] =
     useState(false);
-  const [monthlyWashTypeOpen, setMonthlyWashTypeOpen] = useState(false);
+  const [oneTimeWashTypeOpen, setOneTimeWashTypeOpen] = useState(false);
   const [locationModalOpen, setLocationModalOpen] = useState(false);
   const [monthlyVehiclePhotosModalOpen, setMonthlyVehiclePhotosModalOpen] =
     useState(false);
@@ -198,25 +198,25 @@ const OneTimeService = () => {
             onNext={(vehicle) => {
               setSelectedVehicle(vehicle);
               setOneTimeSelectVehicleOpen(false);
-              setMonthlyWashTypeOpen(true);
+              setOneTimeWashTypeOpen(true);
             }}
           />
         )}
 
-        {monthlyWashTypeOpen && (
-          <MonthlyWashType
-            open={monthlyWashTypeOpen}
-            onOpenChange={setMonthlyWashTypeOpen}
+        {oneTimeWashTypeOpen && (
+          <OneTimeWashType
+            open={oneTimeWashTypeOpen}
+            onOpenChange={setOneTimeWashTypeOpen}
             onNext={(service) => {
               setSelectedWashType(service);
-              setMonthlyWashTypeOpen(false);
+              setOneTimeWashTypeOpen(false);
               setLocationModalOpen(true);
             }}
           />
         )}
 
         {locationModalOpen && (
-          <MonthlyLocation
+          <OneTimeLocation
             open={locationModalOpen}
             onOpenChange={setLocationModalOpen}
             position={position}

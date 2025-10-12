@@ -83,7 +83,7 @@ const MonthlySelectVehicle = ({
               Select Your Vehicle
             </h4>
 
-            <div className="pt-6 pb-[26px] max-h-[320px] overflow-y-auto">
+            <div className="pt-6 md:pt-8 lg:pt-10 pb-[26px] max-h-[320px] overflow-y-auto">
               {data?.data?.vehicles?.map((item) => {
                 const isSelected = selectedVehicleId === item._id;
                 return (

@@ -53,7 +53,7 @@ const OneTimeSelectVehicle = ({
   );
 
   const { data, isLoading } = useQuery<VehicleResponse>({
-    queryKey: ["vehicles"],
+    queryKey: ["one-time-vehicles"],
     queryFn: () =>
       fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/vehicle?washType=One-time Wash`
