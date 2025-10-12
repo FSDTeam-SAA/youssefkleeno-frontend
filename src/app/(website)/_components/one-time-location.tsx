@@ -47,7 +47,7 @@ function ChangeMapView({ coords }: { coords: [number, number] }) {
   return null;
 }
 
-export default function MonthlyLocation({
+export default function OneTimeLocation({
   open,
   onOpenChange,
   onNext,

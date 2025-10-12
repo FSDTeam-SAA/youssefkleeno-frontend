@@ -35,13 +35,14 @@ export interface VehicleResponse {
   data: VehicleData;
 }
 
+
 interface MonthlySelectVehicleProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onNext: (vehicle: Vehicle) => void;
 }
 
-const MonthlySelectVehicle = ({
+const OneTimeSelectVehicle = ({
   open,
   onOpenChange,
   onNext,
@@ -52,10 +53,10 @@ const MonthlySelectVehicle = ({
   );
 
   const { data, isLoading } = useQuery<VehicleResponse>({
-    queryKey: ["vehicles"],
+    queryKey: ["one-time-vehicles"],
     queryFn: () =>
       fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/vehicle?washType=Monthly Subscription`
+        `${process.env.NEXT_PUBLIC_API_URL}/vehicle?washType=One-time Wash`
       ).then((res) => res.json()),
   });
 
@@ -126,4 +127,4 @@ const MonthlySelectVehicle = ({
   );
 };
 
-export default MonthlySelectVehicle;
+export default OneTimeSelectVehicle;

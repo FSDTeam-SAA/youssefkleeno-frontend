@@ -21,7 +21,7 @@ export interface Service {
   __v: number;
 }
 
-interface ServiceData {
+export interface ServiceData {
   total: number;
   page: number;
   limit: number;
@@ -29,7 +29,7 @@ interface ServiceData {
   services: Service[];
 }
 
-interface ServiceResponse {
+export interface ServiceResponse {
   success: boolean;
   message: string;
   data: ServiceData;
@@ -41,7 +41,7 @@ interface MontlyWashTypeProps {
   onNext: (service: Service) => void; // trigger next step on Continue
 }
 
-const MonthlyWashType = ({
+const OneTimeWashType = ({
   open,
   onOpenChange,
   onNext,
@@ -52,12 +52,14 @@ const MonthlyWashType = ({
   );
 
   const { data, isLoading } = useQuery<ServiceResponse>({
-    queryKey: ["monthly-wash-type"],
+    queryKey: ["one-time-wash-type"],
     queryFn: () =>
       fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/service?washType=Monthly Subscription`
+        `${process.env.NEXT_PUBLIC_API_URL}/service?washType=One-time Wash`
       ).then((res) => res.json()),
   });
+
+  console.log("data", data);
 
   const handleSelect = (service: Service) => {
     setSelectedServiceId(service._id);
@@ -90,25 +92,32 @@ const MonthlyWashType = ({
                   <div
                     key={item._id}
                     onClick={() => handleSelect(item)}
-                    className={`flex items-center gap-4 mb-4 cursor-pointer p-4 rounded-md border transition ${
+                    className={`flex items-center justify-between mb-4 cursor-pointer p-4 rounded-md border transition ${
                       isSelected
                         ? "border-[#499FC0] bg-[#E5F6FB]"
                         : "border-gray-200 bg-white"
                     }`}
                   >
-                    <div className="bg-[#0066CC33] p-[15px] rounded-full">
-                      <Image
-                        src={item.serviceImage.url || "/no-image.png"}
-                        alt={item.serviceName}
-                        width={40}
-                        height={40}
-                        className="object-cover rounded-full"
-                      />
-                    </div>
+                    <div className={`flex items-center gap-4 `}>
+                      <div className="bg-[#0066CC33] p-[15px] rounded-full">
+                        <Image
+                          src={item.serviceImage.url || "/no-image.png"}
+                          alt={item.serviceName}
+                          width={40}
+                          height={40}
+                          className="object-cover rounded-full"
+                        />
+                      </div>
 
-                    <h4 className="text-base font-semibold">
-                      {item.serviceName}
-                    </h4>
+                      <h4 className="text-base md:text-lg font-semibold text-[#03090D] leading-[120%]">
+                        {item.serviceName}
+                      </h4>
+                    </div>
+                    <div>
+                      <h4 className="text-lg md:text-xl font-semibold text-[#03090D] leading-[120%]">
+                        ${item.price}
+                      </h4>
+                    </div>
                   </div>
                 );
               })}
@@ -127,4 +136,4 @@ const MonthlyWashType = ({
   );
 };
 
-export default MonthlyWashType;
+export default OneTimeWashType;
