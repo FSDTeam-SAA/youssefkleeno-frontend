@@ -2,16 +2,17 @@
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { Check } from "lucide-react";
 
-
 interface MonthlySubscribeProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   onNext: () => void;
 }
 
-
-const MonthlySubscribe = ({ open, onOpenChange, onNext }: MonthlySubscribeProps) => {
-
+const MonthlySubscribe = ({
+  open,
+  onOpenChange,
+  onNext,
+}: MonthlySubscribeProps) => {
   return (
     <div>
       <Dialog open={open} onOpenChange={onOpenChange}>
