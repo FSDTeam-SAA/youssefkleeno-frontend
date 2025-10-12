@@ -22,6 +22,7 @@ import { SelectedDate } from "@/app/(website)/_components/text";
 import { useMutation } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
 import MonthlySelectDate from "@/app/(website)/_components/monthly-select-date";
+import Loader from "./Loader";
 
 const MonthlyLocation = dynamic(
   () => import("@/app/(website)/_components/monthly-location"),
@@ -75,7 +76,7 @@ const MonthlyService = () => {
   console.log("select location", selectedLocation);
 
   // ✅ Booking API mutation
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationKey: ["create-booking"],
     mutationFn: async () => {
       const formData = new FormData();
@@ -255,14 +256,17 @@ const MonthlyService = () => {
           />
         )}
 
-        {dateSelectionModalOpen && (
-          <MonthlySelectDate
-            open={dateSelectionModalOpen}
-            onOpenChange={setDateSelectionModalOpen}
-            washtypeId={washtypeId || ""}
-            onNext={handleContinue}
-          />
-        )}
+        <div>
+          <Loader loading={isPending} />
+          {!isPending && dateSelectionModalOpen && (
+            <MonthlySelectDate
+              open={dateSelectionModalOpen}
+              onOpenChange={setDateSelectionModalOpen}
+              washtypeId={washtypeId || ""}
+              onNext={handleContinue}
+            />
+          )}
+        </div>
 
         {paymentDiscountModalOpen && (
           <MonthlyPaymentDiscount

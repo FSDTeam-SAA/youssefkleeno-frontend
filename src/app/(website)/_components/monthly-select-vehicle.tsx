@@ -1,10 +1,10 @@
-
 "use client";
 
 import React, { useState } from "react";
 import { Dialog, DialogContent } from "@/components/ui/dialog";
 import { useQuery } from "@tanstack/react-query";
 import Image from "next/image";
+import Loader from "@/components/Loader";
 
 export interface VehicleImage {
   url: string;
@@ -38,7 +38,7 @@ export interface VehicleResponse {
 interface MonthlySelectVehicleProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
- onNext: (vehicle: Vehicle) => void;
+  onNext: (vehicle: Vehicle) => void;
 }
 
 const MonthlySelectVehicle = ({
@@ -47,10 +47,11 @@ const MonthlySelectVehicle = ({
   onNext,
 }: MonthlySelectVehicleProps) => {
   const [selectedVehicleId, setSelectedVehicleId] = useState<string>("");
-   const [selectedVehicleObj, setSelectedVehicleObj] = useState<Vehicle | null>(null);
+  const [selectedVehicleObj, setSelectedVehicleObj] = useState<Vehicle | null>(
+    null
+  );
 
-
-  const { data } = useQuery<VehicleResponse>({
+  const { data, isLoading } = useQuery<VehicleResponse>({
     queryKey: ["vehicles"],
     queryFn: () =>
       fetch(
@@ -60,10 +61,10 @@ const MonthlySelectVehicle = ({
 
   const handleSelect = (vehicle: Vehicle) => {
     setSelectedVehicleId(vehicle._id);
-setSelectedVehicleObj(vehicle); 
+    setSelectedVehicleObj(vehicle);
   };
 
-    const handleContinue = () => {
+  const handleContinue = () => {
     if (selectedVehicleObj) {
       onNext(selectedVehicleObj); // pass vehicle to parent
     } else {
@@ -72,52 +73,57 @@ setSelectedVehicleObj(vehicle);
   };
 
   return (
-    <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="space-y-0 gap-0">
-        <h4 className="text-xl md:text-2xl font-semibold text-black text-center">
-          Select Your Vehicle
-        </h4>
+    <>
+      <Loader loading={isLoading} />
 
-        <div className="pt-6 pb-[26px] max-h-[320px] overflow-y-auto">
-          {data?.data?.vehicles?.map((item) => {
-            const isSelected = selectedVehicleId === item._id;
-            return (
-              <div
-                key={item._id}
-                onClick={() => handleSelect(item)}
-                className={`flex items-center gap-[14px] mb-4 cursor-pointer rounded-[6px] py-[16px] px-[16px] transition-all ${
-                  isSelected
-                    ? "border-[1.5px] border-[#499FC0] bg-[#E5F6FB]"
-                    : "bg-white border border-[#0000001A]"
-                }`}
-              >
-                <div className="bg-[#0066CC33] p-[15px] rounded-full">
-                  <Image
-                    src={item.vehicleImage.url}
-                    alt={item.vehicleName}
-                    width={32}
-                    height={32}
-                    className="object-cover"
-                  />
-                </div>
-                <h4 className="text-base md:text-lg font-semibold text-[#1F2937]">
-                  {item.vehicleName}
-                </h4>
-              </div>
-            );
-          })}
-        </div>
+      {!isLoading && (
+        <Dialog open={open} onOpenChange={onOpenChange}>
+          <DialogContent className="space-y-0 gap-0">
+            <h4 className="text-xl md:text-2xl font-semibold text-black text-center">
+              Select Your Vehicle
+            </h4>
 
-        <button
-          className="w-full h-[55px] text-base font-medium text-white bg-[#499FC0] rounded-[6px]"
-          onClick={handleContinue}
-        >
-          Continue
-        </button>
-      </DialogContent>
-    </Dialog>
+            <div className="pt-6 pb-[26px] max-h-[320px] overflow-y-auto">
+              {data?.data?.vehicles?.map((item) => {
+                const isSelected = selectedVehicleId === item._id;
+                return (
+                  <div
+                    key={item._id}
+                    onClick={() => handleSelect(item)}
+                    className={`flex items-center gap-[14px] mb-4 cursor-pointer rounded-[6px] py-[16px] px-[16px] transition-all ${
+                      isSelected
+                        ? "border-[1.5px] border-[#499FC0] bg-[#E5F6FB]"
+                        : "bg-white border border-[#0000001A]"
+                    }`}
+                  >
+                    <div className="bg-[#0066CC33] p-[15px] rounded-full">
+                      <Image
+                        src={item.vehicleImage.url}
+                        alt={item.vehicleName}
+                        width={32}
+                        height={32}
+                        className="object-cover"
+                      />
+                    </div>
+                    <h4 className="text-base md:text-lg font-semibold text-[#1F2937]">
+                      {item.vehicleName}
+                    </h4>
+                  </div>
+                );
+              })}
+            </div>
+
+            <button
+              className="w-full h-[55px] text-base font-medium text-white bg-[#499FC0] rounded-[6px]"
+              onClick={handleContinue}
+            >
+              Continue
+            </button>
+          </DialogContent>
+        </Dialog>
+      )}
+    </>
   );
 };
 
 export default MonthlySelectVehicle;
-
