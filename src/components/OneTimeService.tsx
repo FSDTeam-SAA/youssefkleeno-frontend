@@ -11,16 +11,16 @@ import { CheckCircle, Droplets, Calendar, Car } from "lucide-react";
 import { Button } from "./ui/button";
 import { Vehicle } from "@/app/(website)/_components/monthly-select-vehicle";
 import { Service } from "@/app/(website)/_components/monthly-wash-type";
-import MonthlyPaymentDiscount from "@/app/(website)/_components/monthly-payment-discount";
 import { toast } from "sonner";
 import { SelectedDate } from "@/app/(website)/_components/text";
 import { useMutation } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
-import MonthlySelectDate from "@/app/(website)/_components/monthly-select-date";
 import Loader from "./Loader";
 import OneTimeSelectVehicle from "@/app/(website)/_components/one-time-select-vehicle";
 import OneTimeWashType from "@/app/(website)/_components/one-time-wash-type";
 import OneTimeVehiclePhotos from "@/app/(website)/_components/one-time-vehicle-photo";
+import OneTimeSelectDate from "@/app/(website)/_components/one-time-select-date";
+import OneTimePaymentDiscount from "@/app/(website)/_components/one-time-payment-discount";
 
 const OneTimeLocation = dynamic(
   () => import("@/app/(website)/_components/one-time-location"),
@@ -78,7 +78,7 @@ const OneTimeService = () => {
     mutationFn: async () => {
       const formData = new FormData();
       formData.append("user", userId);
-      formData.append("bookingType", "subscription");
+      formData.append("bookingType", "one-time");
       formData.append(
         "licensePlate",
         selectedMonthlyVehiclePhoto?.licensePlate || ""
@@ -133,8 +133,8 @@ const OneTimeService = () => {
     if (!selectedLocation) return toast.error("Please enter a location!");
     if (!selectedMonthlyVehiclePhoto)
       return toast.error("Please upload vehicle photos!");
-    if (selectedDatesFromModal.length !== 4)
-      return toast.error("Please select exactly 4 dates!");
+    if (selectedDatesFromModal.length !== 1)
+      return toast.error("Please select exactly 1 date!");
 
     setSelectedDates(selectedDatesFromModal);
     mutate(); // ✅ Call booking API here
@@ -244,7 +244,7 @@ const OneTimeService = () => {
         <div>
           <Loader loading={isPending} />
           {!isPending && dateSelectionModalOpen && (
-            <MonthlySelectDate
+            <OneTimeSelectDate
               open={dateSelectionModalOpen}
               onOpenChange={setDateSelectionModalOpen}
               washtypeId={washtypeId || ""}
@@ -254,7 +254,7 @@ const OneTimeService = () => {
         </div>
 
         {paymentDiscountModalOpen && (
-          <MonthlyPaymentDiscount
+          <OneTimePaymentDiscount
             bookingId={bookingId}
             open={paymentDiscountModalOpen}
             onOpenChange={setPaymentDiscountModalOpen}
