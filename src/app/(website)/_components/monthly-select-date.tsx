@@ -148,7 +148,7 @@ const MonthlySelectDate = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="space-y-3">
-        <h4 className="text-2xl font-semibold text-center">Select 4 Dates</h4>
+        <h4 className="text-xl md:text-2xl lg:text-[32px] font-semibold text-black text-center">Select 4 Dates</h4>
 
         {/* Month & Year Navigation */}
         <div className="flex justify-between items-center mb-2">

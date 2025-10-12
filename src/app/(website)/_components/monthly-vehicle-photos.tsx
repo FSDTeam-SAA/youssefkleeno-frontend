@@ -38,7 +38,7 @@ const MonthlyVehiclePhotos = ({ open, onOpenChange, onNext }: VehicleDetailsModa
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="space-y-4">
-        <h4 className="text-2xl font-semibold text-center">Vehicle Photos</h4>
+        <h4 className="text-xl md:text-2xl lg:text-[32px] font-semibold text-black text-center">Vehicle Photos</h4>
 
         <div className="border-2 border-dashed border-gray-300 rounded-md p-6 flex flex-col items-center justify-center cursor-pointer">
           <input

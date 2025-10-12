@@ -95,7 +95,7 @@ export default function MonthlyLocation({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="space-y-4 w-[600px] max-w-full">
-        <h4 className="text-xl md:text-2xl font-semibold text-black text-center">
+        <h4 className="text-xl md:text-2xl lg:text-[32px] font-semibold text-black text-center">
           Your Location
         </h4>
 

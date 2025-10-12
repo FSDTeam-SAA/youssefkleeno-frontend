@@ -79,7 +79,7 @@ const MonthlyWashType = ({
       {!isLoading && (
         <Dialog open={open} onOpenChange={onOpenChange}>
           <DialogContent className="space-y-4">
-            <h4 className="text-2xl font-semibold text-center">
+            <h4 className="text-xl md:text-2xl lg:text-[32px] font-semibold text-black text-center">
               Select Wash Type
             </h4>
 
@@ -97,7 +97,7 @@ const MonthlyWashType = ({
                     }`}
                   >
                     <Image
-                      src={item.serviceImage.url}
+                      src={item.serviceImage.url || "/no-image.png"}
                       alt={item.serviceName}
                       width={40}
                       height={40}
