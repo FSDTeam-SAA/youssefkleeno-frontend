@@ -97,7 +97,12 @@ const MonthlySelectDate = ({
       if (slots.length === 0) return;
       setSelectedDates([
         ...selectedDates,
-        { date: dateStr, timeSlot: slots[0], steamWash: false, timeSlots: slots },
+        {
+          date: dateStr,
+          timeSlot: slots[0],
+          steamWash: false,
+          timeSlots: slots,
+        },
       ]);
     }
   };
@@ -124,8 +129,18 @@ const MonthlySelectDate = ({
   };
 
   const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   const handlePrevMonth = () => {
@@ -149,7 +164,9 @@ const MonthlySelectDate = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="space-y-3">
-     <h4 className="flex items-center justify-center gap-2 text-xl md:text-2xl lg:text-[32px] font-semibold text-black text-center"><Calendar className="text-[#499FC0] w-8 h-8" /> Select 4 Dates</h4>
+        <h4 className="flex items-center justify-center gap-2 text-xl md:text-2xl lg:text-[32px] font-semibold text-black text-center">
+          <Calendar className="text-[#499FC0] w-8 h-8" /> Select 4 Dates
+        </h4>
         {/* Month & Year Navigation */}
         <div className="flex justify-between items-center mb-2">
           <button
@@ -208,24 +225,28 @@ const MonthlySelectDate = ({
               const isHovered = hoveredDate === dateStr;
 
               return (
-                <button
+                <div
                   key={day}
-                  onClick={() => handleDateSelect(day)}
-                  onMouseEnter={() => setHoveredDate(dateStr)}
-                  onMouseLeave={() => setHoveredDate(null)}
-                  className={`w-10 h-10 rounded-full flex items-center justify-center text-sm ${
-                    isPast
-                      ? "bg-gray-200 cursor-not-allowed"
-                      : isSelected
-                      ? "bg-[#499FC0] text-white"
-                      : isHovered
-                      ? "bg-blue-100"
-                      : "hover:bg-blue-100"
-                  }`}
-                  disabled={isPast}
+                  className="w-full flex items-center justify-center"
                 >
-                  {day}
-                </button>
+                  <button
+                    onClick={() => handleDateSelect(day)}
+                    onMouseEnter={() => setHoveredDate(dateStr)}
+                    onMouseLeave={() => setHoveredDate(null)}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center text-sm ${
+                      isPast
+                        ? "bg-gray-200 cursor-not-allowed"
+                        : isSelected
+                        ? "bg-[#499FC0] text-white"
+                        : isHovered
+                        ? "bg-blue-100"
+                        : "hover:bg-blue-100"
+                    }`}
+                    disabled={isPast}
+                  >
+                    {day}
+                  </button>
+                </div>
               );
             })}
           </div>
@@ -235,7 +256,10 @@ const MonthlySelectDate = ({
         {selectedDates.length > 0 && (
           <div className="space-y-3 max-h-[250px] overflow-y-auto">
             {selectedDates.map((dateObj, index) => (
-              <div key={index} className="border border-gray-300 p-2 rounded-md">
+              <div
+                key={index}
+                className="border border-gray-300 p-2 rounded-md"
+              >
                 <p className="text-sm font-medium">
                   Wash #{index + 1} - {dateObj.date}
                 </p>
@@ -290,8 +314,6 @@ const MonthlySelectDate = ({
 };
 
 export default MonthlySelectDate;
-
-
 
 // "use client";
 // import React, { useState } from "react";

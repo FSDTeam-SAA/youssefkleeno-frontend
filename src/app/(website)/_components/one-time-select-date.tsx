@@ -235,8 +235,9 @@ const OneTimeSelectDate = ({
               const isHovered = hoveredDate === dateStr;
 
               return (
-                <button
-                  key={day}
+                <div className=" w-full flex items-center justify-center" key={day}>
+                  <button
+                 
                   onClick={() => handleDateSelect(day)}
                   onMouseEnter={() => setHoveredDate(dateStr)}
                   onMouseLeave={() => setHoveredDate(null)}
@@ -253,6 +254,7 @@ const OneTimeSelectDate = ({
                 >
                   {day}
                 </button>
+                </div>
               );
             })}
           </div>
