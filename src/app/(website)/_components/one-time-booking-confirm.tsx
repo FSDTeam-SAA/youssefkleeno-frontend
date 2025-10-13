@@ -18,7 +18,7 @@ interface MonthlySubscribeProps {
   serviceType: string;
 }
 
-const MonthlyBookingConfirm = ({
+const OneTimeBookingConfirm = ({
   open,
   onOpenChange,
   bookingId,
@@ -112,4 +112,4 @@ const MonthlyBookingConfirm = ({
   );
 };
 
-export default MonthlyBookingConfirm;
+export default OneTimeBookingConfirm;
