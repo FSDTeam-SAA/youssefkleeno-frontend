@@ -21,6 +21,7 @@ import OneTimeWashType from "@/app/(website)/_components/one-time-wash-type";
 import OneTimeVehiclePhotos from "@/app/(website)/_components/one-time-vehicle-photo";
 import OneTimeSelectDate from "@/app/(website)/_components/one-time-select-date";
 import OneTimePaymentDiscount from "@/app/(website)/_components/one-time-payment-discount";
+import OneTimeBookingConfirm from "@/app/(website)/_components/one-time-booking-confirm";
 
 const OneTimeLocation = dynamic(
   () => import("@/app/(website)/_components/one-time-location"),
@@ -47,9 +48,12 @@ const OneTimeService = () => {
   const [locationModalOpen, setLocationModalOpen] = useState(false);
   const [oneTimeVehiclePhotosModalOpen, setOneTimeVehiclePhotosModalOpen] =
     useState(false);
+      const [oneTimeBookingConfirmModalOpen, setOneTimeBookingConfirmModalOpen] =
+        useState(false);
   const [dateSelectionModalOpen, setDateSelectionModalOpen] = useState(false);
   const [paymentDiscountModalOpen, setPaymentDiscountModalOpen] =
     useState(false);
+      const [totalPrice, setTotalPrice] = useState(0);
 
   // Selected data state
   const [selectedLocation, setSelectedLocation] = useState("");
@@ -67,7 +71,7 @@ const OneTimeService = () => {
   // ✅ Position state lifted up here
   const [position, setPosition] = useState<[number, number]>(defaultPosition);
 
-  console.log(position);
+  console.log(selectedDates);
   const washtypeId = selectedWashType?._id;
   const [bookingId, setBookingId] = useState("");
   console.log("select location", selectedLocation);
@@ -121,6 +125,7 @@ const OneTimeService = () => {
       setDateSelectionModalOpen(false);
       setPaymentDiscountModalOpen(true);
       setBookingId(data?.data?._id);
+      setTotalPrice(data?.data?.price);
     },
     onError: (error: MyError) => {
       toast.error(error.message || "Booking failed!");
@@ -142,7 +147,7 @@ const OneTimeService = () => {
 
   const handlePaymentComplete = () => {
     setPaymentDiscountModalOpen(false);
-    toast.success("Payment successful! Subscription activated.");
+    setOneTimeBookingConfirmModalOpen(true);
   };
   return (
     <div>
@@ -256,9 +261,21 @@ const OneTimeService = () => {
         {paymentDiscountModalOpen && (
           <OneTimePaymentDiscount
             bookingId={bookingId}
+             totalPrice={totalPrice}
             open={paymentDiscountModalOpen}
             onOpenChange={setPaymentDiscountModalOpen}
             onNext={handlePaymentComplete}
+          />
+        )}
+
+         {oneTimeBookingConfirmModalOpen && (
+          <OneTimeBookingConfirm
+            open={oneTimeBookingConfirmModalOpen}
+            onOpenChange={setOneTimeBookingConfirmModalOpen}
+            bookingId={bookingId}
+            bookingDate={selectedDates.length > 0 ? [selectedDates[0]] : [{ date: "", timeSlot: "", steamWash: false, timeSlots: [] }]}
+            location={selectedLocation}
+            serviceType={selectedWashType?.washType || ""}
           />
         )}
       </>
