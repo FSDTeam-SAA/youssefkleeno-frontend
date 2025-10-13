@@ -84,23 +84,49 @@ const OneTimeSelectDate = ({
     }
   };
 
-  const handleDateSelect = async (day: number) => {
-    const dateStr = formatDate(year, month, day);
-    const date = new Date(dateStr.replace(/\//g, "-"));
-    if (date < currentDate) return;
+  // const handleDateSelect = async (day: number) => {
+  //   const dateStr = formatDate(year, month, day);
+  //   const date = new Date(dateStr.replace(/\//g, "-"));
+  //   if (date < currentDate) return;
 
-    const existing = selectedDates.find((d) => d.date === dateStr);
-    if (existing) {
-      setSelectedDates(selectedDates.filter((d) => d.date !== dateStr));
-    } else if (selectedDates.length < 4) {
-      const slots = await fetchSlotsForDate(dateStr);
-      if (slots.length === 0) return;
-      setSelectedDates([
-        ...selectedDates,
-        { date: dateStr, timeSlot: slots[0], steamWash: false, timeSlots: slots },
-      ]);
-    }
-  };
+  //   const existing = selectedDates.find((d) => d.date === dateStr);
+  //   if (existing) {
+  //     setSelectedDates(selectedDates.filter((d) => d.date !== dateStr));
+  //   } else if (selectedDates.length < 4) {
+  //     const slots = await fetchSlotsForDate(dateStr);
+  //     if (slots.length === 0) return;
+  //     setSelectedDates([
+  //       ...selectedDates,
+  //       { date: dateStr, timeSlot: slots[0], steamWash: false, timeSlots: slots },
+  //     ]);
+  //   }
+  // };
+
+  const handleDateSelect = async (day: number) => {
+  const dateStr = formatDate(year, month, day);
+  const date = new Date(dateStr.replace(/\//g, "-"));
+  if (date < currentDate) return;
+
+  // If user clicks the same date again, unselect it
+  if (selectedDates[0]?.date === dateStr) {
+    setSelectedDates([]);
+    return;
+  }
+
+  // Fetch available slots for that date
+  const slots = await fetchSlotsForDate(dateStr);
+  if (slots.length === 0) return;
+
+  // Always replace previous selection with new one
+  setSelectedDates([
+    {
+      date: dateStr,
+      timeSlot: slots[0],
+      steamWash: false,
+      timeSlots: slots,
+    },
+  ]);
+};
 
   const handleTimeSlotChange = (date: string, timeSlot: string) => {
     setSelectedDates((prev) =>
@@ -116,7 +142,7 @@ const OneTimeSelectDate = ({
 
   const handleContinue = () => {
     if (selectedDates.length !== 1) {
-      toast.error("Please select exactly 1 dates!");
+      toast.error("Please select exactly one date!");
       return;
     }
     onNext(selectedDates);

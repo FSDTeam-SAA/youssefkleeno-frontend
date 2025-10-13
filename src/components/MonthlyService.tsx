@@ -65,9 +65,9 @@ const MonthlyService = () => {
     null
   );
 
-  console.log(selectedWashType);
+  // console.log(selectedWashType);
   const [totalPrice, setTotalPrice] = useState(0);
-  console.log(totalPrice);
+  // console.log(totalPrice);
   const [selectedMonthlyVehiclePhoto, setSelectedMonthlyVehiclePhoto] =
     useState<{
       photo: string | File;
