@@ -233,7 +233,7 @@ const MonthlySelectDate = ({
 
         {/* Selected Dates Section */}
         {selectedDates.length > 0 && (
-          <div className="space-y-3 max-h-[300px] overflow-y-auto">
+          <div className="space-y-3 max-h-[250px] overflow-y-auto">
             {selectedDates.map((dateObj, index) => (
               <div key={index} className="border border-gray-300 p-2 rounded-md">
                 <p className="text-sm font-medium">
