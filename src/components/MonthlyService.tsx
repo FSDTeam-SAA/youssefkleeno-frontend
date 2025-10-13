@@ -23,6 +23,7 @@ import { useMutation } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
 import MonthlySelectDate from "@/app/(website)/_components/monthly-select-date";
 import Loader from "./Loader";
+import MonthlyBookingConfirm from "@/app/(website)/_components/monthly-booking-confirm";
 
 const MonthlyLocation = dynamic(
   () => import("@/app/(website)/_components/monthly-location"),
@@ -54,12 +55,19 @@ const MonthlyService = () => {
   const [paymentDiscountModalOpen, setPaymentDiscountModalOpen] =
     useState(false);
 
+  const [monthlyBookingConfirmModalOpen, setMonthlyBookingConfirmModalOpen] =
+    useState(false);
+
   // Selected data state
   const [selectedLocation, setSelectedLocation] = useState("");
   const [selectedVehicle, setSelectedVehicle] = useState<Vehicle | null>(null);
   const [selectedWashType, setSelectedWashType] = useState<Service | null>(
     null
   );
+
+  console.log(selectedWashType);
+  const [totalPrice, setTotalPrice] = useState(0);
+  console.log(totalPrice);
   const [selectedMonthlyVehiclePhoto, setSelectedMonthlyVehiclePhoto] =
     useState<{
       photo: string | File;
@@ -124,6 +132,7 @@ const MonthlyService = () => {
       setDateSelectionModalOpen(false);
       setPaymentDiscountModalOpen(true);
       setBookingId(data?.data?._id);
+      setTotalPrice(data?.data?.price);
     },
     onError: (error: MyError) => {
       toast.error(error.message || "Booking failed!");
@@ -145,8 +154,9 @@ const MonthlyService = () => {
 
   const handlePaymentComplete = () => {
     setPaymentDiscountModalOpen(false);
-    toast.success("Payment successful! Subscription activated.");
+    setMonthlyBookingConfirmModalOpen(true);
   };
+
   return (
     <div>
       {/* Monthly Subscription Card */}
@@ -271,9 +281,21 @@ const MonthlyService = () => {
         {paymentDiscountModalOpen && (
           <MonthlyPaymentDiscount
             bookingId={bookingId}
+            totalPrice={totalPrice}
             open={paymentDiscountModalOpen}
             onOpenChange={setPaymentDiscountModalOpen}
             onNext={handlePaymentComplete}
+          />
+        )}
+
+        {monthlyBookingConfirmModalOpen && (
+          <MonthlyBookingConfirm
+            open={monthlyBookingConfirmModalOpen}
+            onOpenChange={setMonthlyBookingConfirmModalOpen}
+            bookingId={bookingId}
+            bookingDate={selectedDates.length > 0 ? [selectedDates[0]] : [{ date: "", timeSlot: "", steamWash: false, timeSlots: [] }]}
+            location={selectedLocation}
+            serviceType={selectedWashType?.washType || ""}
           />
         )}
       </>
