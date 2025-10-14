@@ -126,6 +126,11 @@ const MonthlySelectDate = ({
       toast.error("Please select exactly 4 dates!");
       return;
     }
+    const unCheckedSteam = selectedDates.some((d) => !d.steamWash);
+    if (unCheckedSteam) {
+      toast.error("Please enable wash type for all selected dates!");
+      return;
+    }
     onNext(selectedDates);
     onOpenChange(false);
   };
@@ -386,4 +391,3 @@ const MonthlySelectDate = ({
 };
 
 export default MonthlySelectDate;
-

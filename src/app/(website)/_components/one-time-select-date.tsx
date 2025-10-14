@@ -147,6 +147,11 @@ const OneTimeSelectDate = ({
       toast.error("Please select exactly one date!");
       return;
     }
+    const unCheckedSteam = selectedDates.some((d) => !d.steamWash);
+    if (unCheckedSteam) {
+      toast.error("Please enable wash type for selected dates!");
+      return;
+    }
     onNext(selectedDates);
     onOpenChange(false);
   };
@@ -276,69 +281,73 @@ const OneTimeSelectDate = ({
           </div>
         </div> */}
         {/* Calendar Grid */}
-<div className="border border-gray-300 rounded-md p-4">
-  {/* Weekday header */}
-  <div className="grid grid-cols-7 gap-1 text-center mb-2">
-    {weekdays.map((day) => (
-      <div key={day} className="text-sm font-medium text-gray-600">
-        {day}
-      </div>
-    ))}
-  </div>
-
-  {/* Dynamic calendar days */}
-  <div className="grid grid-cols-7 gap-1">
-    {(() => {
-      const firstDayOfMonth = new Date(year, month - 1, 1).getDay(); // 0 = Sunday
-      const emptyCells = Array.from({ length: firstDayOfMonth }); // blank before start
-      const totalDays = Array.from({ length: daysInMonth }, (_, i) => i + 1);
-
-      return (
-        <>
-          {/* Empty cells before first day */}
-          {emptyCells.map((_, idx) => (
-            <div key={`empty-${idx}`} className="w-10 h-10" />
-          ))}
-
-          {/* Actual days */}
-          {totalDays.map((day) => {
-            const dateStr = formatDate(year, month, day);
-            const date = new Date(dateStr.replace(/\//g, "-"));
-            const isSelected = selectedDates.some((d) => d.date === dateStr);
-            const isPast = date < currentDate;
-            const isHovered = hoveredDate === dateStr;
-
-            return (
-              <div
-                key={day}
-                className="w-full flex items-center justify-center"
-              >
-                <button
-                  onClick={() => handleDateSelect(day)}
-                  onMouseEnter={() => setHoveredDate(dateStr)}
-                  onMouseLeave={() => setHoveredDate(null)}
-                  className={`w-10 h-10 rounded-full flex items-center justify-center text-sm transition ${
-                    isPast
-                      ? "bg-gray-200 cursor-not-allowed"
-                      : isSelected
-                      ? "bg-[#499FC0] text-white"
-                      : isHovered
-                      ? "bg-blue-100"
-                      : "hover:bg-blue-100"
-                  }`}
-                  disabled={isPast}
-                >
-                  {day}
-                </button>
+        <div className="border border-gray-300 rounded-md p-4">
+          {/* Weekday header */}
+          <div className="grid grid-cols-7 gap-1 text-center mb-2">
+            {weekdays.map((day) => (
+              <div key={day} className="text-sm font-medium text-gray-600">
+                {day}
               </div>
-            );
-          })}
-        </>
-      );
-    })()}
-  </div>
-</div>
+            ))}
+          </div>
 
+          {/* Dynamic calendar days */}
+          <div className="grid grid-cols-7 gap-1">
+            {(() => {
+              const firstDayOfMonth = new Date(year, month - 1, 1).getDay(); // 0 = Sunday
+              const emptyCells = Array.from({ length: firstDayOfMonth }); // blank before start
+              const totalDays = Array.from(
+                { length: daysInMonth },
+                (_, i) => i + 1
+              );
+
+              return (
+                <>
+                  {/* Empty cells before first day */}
+                  {emptyCells.map((_, idx) => (
+                    <div key={`empty-${idx}`} className="w-10 h-10" />
+                  ))}
+
+                  {/* Actual days */}
+                  {totalDays.map((day) => {
+                    const dateStr = formatDate(year, month, day);
+                    const date = new Date(dateStr.replace(/\//g, "-"));
+                    const isSelected = selectedDates.some(
+                      (d) => d.date === dateStr
+                    );
+                    const isPast = date < currentDate;
+                    const isHovered = hoveredDate === dateStr;
+
+                    return (
+                      <div
+                        key={day}
+                        className="w-full flex items-center justify-center"
+                      >
+                        <button
+                          onClick={() => handleDateSelect(day)}
+                          onMouseEnter={() => setHoveredDate(dateStr)}
+                          onMouseLeave={() => setHoveredDate(null)}
+                          className={`w-10 h-10 rounded-full flex items-center justify-center text-sm transition ${
+                            isPast
+                              ? "bg-gray-200 cursor-not-allowed"
+                              : isSelected
+                              ? "bg-[#499FC0] text-white"
+                              : isHovered
+                              ? "bg-blue-100"
+                              : "hover:bg-blue-100"
+                          }`}
+                          disabled={isPast}
+                        >
+                          {day}
+                        </button>
+                      </div>
+                    );
+                  })}
+                </>
+              );
+            })()}
+          </div>
+        </div>
 
         {/* Selected Dates Section */}
         {selectedDates.length > 0 && (
