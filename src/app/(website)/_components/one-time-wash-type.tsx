@@ -13,6 +13,8 @@ export interface ServiceImage {
 export interface Service {
   _id: string;
   serviceName: string;
+  serviceDescription: string;
+  note: string;
   price: number;
   washType: string;
   serviceImage: ServiceImage;
@@ -92,32 +94,36 @@ const OneTimeWashType = ({
                   <div
                     key={item._id}
                     onClick={() => handleSelect(item)}
-                    className={`flex items-center justify-between mb-4 cursor-pointer p-4 rounded-md border transition ${
+                    className={`mb-4 cursor-pointer p-4 rounded-md border transition ${
                       isSelected
                         ? "border-[#499FC0] bg-[#E5F6FB]"
                         : "border-gray-200 bg-white"
                     }`}
                   >
-                    <div className={`flex items-center gap-4 `}>
-                      <div className="bg-[#0066CC33] p-[15px] rounded-full">
+                    <div className={`flex items-center gap-4`}>
+                      <div className="bg-[#0066CC33] p-3 rounded-full">
                         <Image
                           src={item.serviceImage.url || "/no-image.png"}
                           alt={item.serviceName}
                           width={40}
                           height={40}
-                          className="object-cover rounded-full"
+                          className="w-10 h-10 object-cover rounded-full"
                         />
                       </div>
 
-                      <h4 className="text-base md:text-lg font-semibold text-[#03090D] leading-[120%]">
+                      <h4 className="text-base font-semibold">
                         {item.serviceName}
                       </h4>
                     </div>
-                    <div>
-                      <h4 className="text-lg md:text-xl font-semibold text-[#03090D] leading-[120%]">
-                        ${item.price}
-                      </h4>
-                    </div>
+                    <p className="text-base font-normal text-[#03090D] leading-[120%] pt-2 md:pt-3">
+                      {item?.serviceDescription}
+                    </p>
+                    {item?.note && (
+                      <p className="bg-[#FACC1533] px-3 py-[14px] border border-[#FACC15] text-sm font-normal text-[#854D0E] leading-[120%] mt-2 md:mt-3 rounded-[6px]">
+                        <span className="font-medium">Note :</span>
+                        {item?.note}
+                      </p>
+                    )}
                   </div>
                 );
               })}

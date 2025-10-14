@@ -6,14 +6,12 @@ interface MonthlySubscribeProps {
   open: boolean;
   onOpenChange: (open: boolean) => void;
   bookingId: string;
-  bookingDate: [
-    {
-      date: string; // যেমন '2025/10/18'
-      timeSlot: string; // যেমন '9:00 AM-9:00 AM'
-      steamWash: boolean; // true/false
-      timeSlots: Array<string>; // sub array of available time slots
-    }
-  ];
+  bookingDate: {
+    date: string;
+    timeSlot: string;
+    steamWash: boolean;
+    timeSlots: string[];
+  }[];
   location: string;
   serviceType: string;
 }
@@ -26,7 +24,7 @@ const MonthlyBookingConfirm = ({
   location,
   serviceType,
 }: MonthlySubscribeProps) => {
-  // console.log("fdfdfdt", bookingDate);
+  console.log("fdfdfdt", bookingDate);
   return (
     <div>
       <Dialog open={open} onOpenChange={onOpenChange}>

@@ -18,10 +18,10 @@ import MonthlyWashType from "@/app/(website)/_components/monthly-wash-type";
 import MonthlyVehiclePhotos from "@/app/(website)/_components/monthly-vehicle-photos";
 import MonthlyPaymentDiscount from "@/app/(website)/_components/monthly-payment-discount";
 import { toast } from "sonner";
-import { SelectedDate } from "@/app/(website)/_components/text";
+
 import { useMutation } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
-import MonthlySelectDate from "@/app/(website)/_components/monthly-select-date";
+import MonthlySelectDate, { SelectedDate } from "@/app/(website)/_components/monthly-select-date";
 import Loader from "./Loader";
 import MonthlyBookingConfirm from "@/app/(website)/_components/monthly-booking-confirm";
 
@@ -73,15 +73,17 @@ const MonthlyService = () => {
       photo: string | File;
       licensePlate: string;
     } | null>(null);
-  console.log("Selected Vehicle Details:", selectedMonthlyVehiclePhoto);
+  // console.log("Selected Vehicle Details:", selectedMonthlyVehiclePhoto);
   const [selectedDates, setSelectedDates] = useState<SelectedDate[]>([]);
   // ✅ Position state lifted up here
   const [position, setPosition] = useState<[number, number]>(defaultPosition);
 
-  console.log(position);
+  // console.log("date", selectedDates);
+
+  // console.log(position);
   const washtypeId = selectedWashType?._id;
   const [bookingId, setBookingId] = useState("");
-  console.log("select location", selectedLocation);
+  // console.log("select location", selectedLocation);
 
   // ✅ Booking API mutation
   const { mutate, isPending } = useMutation({
@@ -273,6 +275,7 @@ const MonthlyService = () => {
               open={dateSelectionModalOpen}
               onOpenChange={setDateSelectionModalOpen}
               washtypeId={washtypeId || ""}
+              serViceName={selectedWashType?.serviceName || ""}
               onNext={handleContinue}
             />
           )}
@@ -293,7 +296,11 @@ const MonthlyService = () => {
             open={monthlyBookingConfirmModalOpen}
             onOpenChange={setMonthlyBookingConfirmModalOpen}
             bookingId={bookingId}
-            bookingDate={selectedDates.length > 0 ? [selectedDates[0]] : [{ date: "", timeSlot: "", steamWash: false, timeSlots: [] }]}
+            bookingDate={
+              selectedDates?.length > 0
+                ? selectedDates 
+                : [{ date: "", timeSlot: "", steamWash: false, timeSlots: [] }] 
+            }
             location={selectedLocation}
             serviceType={selectedWashType?.washType || ""}
           />

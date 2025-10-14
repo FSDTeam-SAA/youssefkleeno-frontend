@@ -36,12 +36,14 @@ interface MonthlyDateSelectionProps {
   onOpenChange: (open: boolean) => void;
   onNext: (selectedDates: SelectedDate[]) => void;
   washtypeId: string | null;
+  serviceName: string | null;
 }
 
 const OneTimeSelectDate = ({
   open,
   onOpenChange,
   onNext,
+  serviceName,
 }: MonthlyDateSelectionProps) => {
   const [selectedDates, setSelectedDates] = useState<SelectedDate[]>([]);
   const [hoveredDate, setHoveredDate] = useState<string | null>(null);
@@ -103,30 +105,30 @@ const OneTimeSelectDate = ({
   // };
 
   const handleDateSelect = async (day: number) => {
-  const dateStr = formatDate(year, month, day);
-  const date = new Date(dateStr.replace(/\//g, "-"));
-  if (date < currentDate) return;
+    const dateStr = formatDate(year, month, day);
+    const date = new Date(dateStr.replace(/\//g, "-"));
+    if (date < currentDate) return;
 
-  // If user clicks the same date again, unselect it
-  if (selectedDates[0]?.date === dateStr) {
-    setSelectedDates([]);
-    return;
-  }
+    // If user clicks the same date again, unselect it
+    if (selectedDates[0]?.date === dateStr) {
+      setSelectedDates([]);
+      return;
+    }
 
-  // Fetch available slots for that date
-  const slots = await fetchSlotsForDate(dateStr);
-  if (slots.length === 0) return;
+    // Fetch available slots for that date
+    const slots = await fetchSlotsForDate(dateStr);
+    if (slots.length === 0) return;
 
-  // Always replace previous selection with new one
-  setSelectedDates([
-    {
-      date: dateStr,
-      timeSlot: slots[0],
-      steamWash: false,
-      timeSlots: slots,
-    },
-  ]);
-};
+    // Always replace previous selection with new one
+    setSelectedDates([
+      {
+        date: dateStr,
+        timeSlot: slots[0],
+        steamWash: false,
+        timeSlots: slots,
+      },
+    ]);
+  };
 
   const handleTimeSlotChange = (date: string, timeSlot: string) => {
     setSelectedDates((prev) =>
@@ -145,13 +147,28 @@ const OneTimeSelectDate = ({
       toast.error("Please select exactly one date!");
       return;
     }
+    const unCheckedSteam = selectedDates.some((d) => !d.steamWash);
+    if (unCheckedSteam) {
+      toast.error("Please enable wash type for selected dates!");
+      return;
+    }
     onNext(selectedDates);
     onOpenChange(false);
   };
 
   const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   const handlePrevMonth = () => {
@@ -175,7 +192,9 @@ const OneTimeSelectDate = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="space-y-3">
-        <h4 className="flex items-center justify-center gap-2 text-xl md:text-2xl lg:text-[32px] font-semibold text-black text-center"><Calendar className="text-[#499FC0] w-8 h-8" /> Select a Dates</h4>
+        <h4 className="flex items-center justify-center gap-2 text-xl md:text-2xl lg:text-[32px] font-semibold text-black text-center">
+          <Calendar className="text-[#499FC0] w-8 h-8" /> Select a Dates
+        </h4>
 
         {/* Month & Year Navigation */}
         <div className="flex justify-between items-center mb-2">
@@ -218,7 +237,7 @@ const OneTimeSelectDate = ({
         </div>
 
         {/* Calendar Grid */}
-        <div className="border border-gray-300 rounded-md p-4">
+        {/* <div className="border border-gray-300 rounded-md p-4">
           <div className="grid grid-cols-7 gap-1 text-center mb-2">
             {weekdays.map((day) => (
               <div key={day} className="text-sm font-medium text-gray-600">
@@ -235,28 +254,98 @@ const OneTimeSelectDate = ({
               const isHovered = hoveredDate === dateStr;
 
               return (
-                <div className=" w-full flex items-center justify-center" key={day}>
-                  <button
-                 
-                  onClick={() => handleDateSelect(day)}
-                  onMouseEnter={() => setHoveredDate(dateStr)}
-                  onMouseLeave={() => setHoveredDate(null)}
-                  className={`w-10 h-10 rounded-full flex items-center justify-center text-sm ${
-                    isPast
-                      ? "bg-gray-200 cursor-not-allowed"
-                      : isSelected
-                      ? "bg-[#499FC0] text-white"
-                      : isHovered
-                      ? "bg-blue-100"
-                      : "hover:bg-blue-100"
-                  }`}
-                  disabled={isPast}
+                <div
+                  className=" w-full flex items-center justify-center"
+                  key={day}
                 >
-                  {day}
-                </button>
+                  <button
+                    onClick={() => handleDateSelect(day)}
+                    onMouseEnter={() => setHoveredDate(dateStr)}
+                    onMouseLeave={() => setHoveredDate(null)}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center text-sm ${
+                      isPast
+                        ? "bg-gray-200 cursor-not-allowed"
+                        : isSelected
+                        ? "bg-[#499FC0] text-white"
+                        : isHovered
+                        ? "bg-blue-100"
+                        : "hover:bg-blue-100"
+                    }`}
+                    disabled={isPast}
+                  >
+                    {day}
+                  </button>
                 </div>
               );
             })}
+          </div>
+        </div> */}
+        {/* Calendar Grid */}
+        <div className="border border-gray-300 rounded-md p-4">
+          {/* Weekday header */}
+          <div className="grid grid-cols-7 gap-1 text-center mb-2">
+            {weekdays.map((day) => (
+              <div key={day} className="text-sm font-medium text-gray-600">
+                {day}
+              </div>
+            ))}
+          </div>
+
+          {/* Dynamic calendar days */}
+          <div className="grid grid-cols-7 gap-1">
+            {(() => {
+              const firstDayOfMonth = new Date(year, month - 1, 1).getDay(); // 0 = Sunday
+              const emptyCells = Array.from({ length: firstDayOfMonth }); // blank before start
+              const totalDays = Array.from(
+                { length: daysInMonth },
+                (_, i) => i + 1
+              );
+
+              return (
+                <>
+                  {/* Empty cells before first day */}
+                  {emptyCells.map((_, idx) => (
+                    <div key={`empty-${idx}`} className="w-10 h-10" />
+                  ))}
+
+                  {/* Actual days */}
+                  {totalDays.map((day) => {
+                    const dateStr = formatDate(year, month, day);
+                    const date = new Date(dateStr.replace(/\//g, "-"));
+                    const isSelected = selectedDates.some(
+                      (d) => d.date === dateStr
+                    );
+                    const isPast = date < currentDate;
+                    const isHovered = hoveredDate === dateStr;
+
+                    return (
+                      <div
+                        key={day}
+                        className="w-full flex items-center justify-center"
+                      >
+                        <button
+                          onClick={() => handleDateSelect(day)}
+                          onMouseEnter={() => setHoveredDate(dateStr)}
+                          onMouseLeave={() => setHoveredDate(null)}
+                          className={`w-10 h-10 rounded-full flex items-center justify-center text-sm transition ${
+                            isPast
+                              ? "bg-gray-200 cursor-not-allowed"
+                              : isSelected
+                              ? "bg-[#499FC0] text-white"
+                              : isHovered
+                              ? "bg-blue-100"
+                              : "hover:bg-blue-100"
+                          }`}
+                          disabled={isPast}
+                        >
+                          {day}
+                        </button>
+                      </div>
+                    );
+                  })}
+                </>
+              );
+            })()}
           </div>
         </div>
 
@@ -264,7 +353,10 @@ const OneTimeSelectDate = ({
         {selectedDates.length > 0 && (
           <div className="space-y-3 max-h-[300px] overflow-y-auto">
             {selectedDates.map((dateObj, index) => (
-              <div key={index} className="border border-gray-300 p-2 rounded-md">
+              <div
+                key={index}
+                className="border border-gray-300 p-2 rounded-md"
+              >
                 <p className="text-sm font-medium">
                   Wash #{index + 1} - {dateObj.date}
                 </p>
@@ -299,7 +391,8 @@ const OneTimeSelectDate = ({
                     htmlFor={`steam-wash-${index}`}
                     className="text-sm font-medium text-[#03090D] leading-[120%]"
                   >
-                    Steam Wash
+                    {/* Steam Wash */}
+                    {serviceName}
                   </Label>
                 </div>
               </div>
