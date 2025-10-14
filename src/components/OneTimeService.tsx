@@ -12,14 +12,13 @@ import { Button } from "./ui/button";
 import { Vehicle } from "@/app/(website)/_components/monthly-select-vehicle";
 import { Service } from "@/app/(website)/_components/monthly-wash-type";
 import { toast } from "sonner";
-import { SelectedDate } from "@/app/(website)/_components/text";
 import { useMutation } from "@tanstack/react-query";
 import dynamic from "next/dynamic";
 import Loader from "./Loader";
 import OneTimeSelectVehicle from "@/app/(website)/_components/one-time-select-vehicle";
 import OneTimeWashType from "@/app/(website)/_components/one-time-wash-type";
 import OneTimeVehiclePhotos from "@/app/(website)/_components/one-time-vehicle-photo";
-import OneTimeSelectDate from "@/app/(website)/_components/one-time-select-date";
+import OneTimeSelectDate, { SelectedDate } from "@/app/(website)/_components/one-time-select-date";
 import OneTimePaymentDiscount from "@/app/(website)/_components/one-time-payment-discount";
 import OneTimeBookingConfirm from "@/app/(website)/_components/one-time-booking-confirm";
 
@@ -66,15 +65,15 @@ const OneTimeService = () => {
       photo: string | File;
       licensePlate: string;
     } | null>(null);
-  console.log("Selected Vehicle Details:", selectedMonthlyVehiclePhoto);
+  // console.log("Selected Vehicle Details:", selectedMonthlyVehiclePhoto);
   const [selectedDates, setSelectedDates] = useState<SelectedDate[]>([]);
   // ✅ Position state lifted up here
   const [position, setPosition] = useState<[number, number]>(defaultPosition);
 
-  console.log(selectedDates);
+  // console.log(selectedDates);
   const washtypeId = selectedWashType?._id;
   const [bookingId, setBookingId] = useState("");
-  console.log("select location", selectedLocation);
+  // console.log("select location", selectedLocation);
 
   // ✅ Booking API mutation
   const { mutate, isPending } = useMutation({
@@ -253,6 +252,7 @@ const OneTimeService = () => {
               open={dateSelectionModalOpen}
               onOpenChange={setDateSelectionModalOpen}
               washtypeId={washtypeId || ""}
+              serviceName={selectedWashType?.serviceName || ""}
               onNext={handleContinue}
             />
           )}

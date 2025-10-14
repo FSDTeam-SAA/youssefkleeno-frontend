@@ -36,12 +36,14 @@ interface MonthlyDateSelectionProps {
   onOpenChange: (open: boolean) => void;
   onNext: (selectedDates: SelectedDate[]) => void;
   washtypeId: string | null;
+  serviceName: string | null;
 }
 
 const OneTimeSelectDate = ({
   open,
   onOpenChange,
   onNext,
+  serviceName,
 }: MonthlyDateSelectionProps) => {
   const [selectedDates, setSelectedDates] = useState<SelectedDate[]>([]);
   const [hoveredDate, setHoveredDate] = useState<string | null>(null);
@@ -103,30 +105,30 @@ const OneTimeSelectDate = ({
   // };
 
   const handleDateSelect = async (day: number) => {
-  const dateStr = formatDate(year, month, day);
-  const date = new Date(dateStr.replace(/\//g, "-"));
-  if (date < currentDate) return;
+    const dateStr = formatDate(year, month, day);
+    const date = new Date(dateStr.replace(/\//g, "-"));
+    if (date < currentDate) return;
 
-  // If user clicks the same date again, unselect it
-  if (selectedDates[0]?.date === dateStr) {
-    setSelectedDates([]);
-    return;
-  }
+    // If user clicks the same date again, unselect it
+    if (selectedDates[0]?.date === dateStr) {
+      setSelectedDates([]);
+      return;
+    }
 
-  // Fetch available slots for that date
-  const slots = await fetchSlotsForDate(dateStr);
-  if (slots.length === 0) return;
+    // Fetch available slots for that date
+    const slots = await fetchSlotsForDate(dateStr);
+    if (slots.length === 0) return;
 
-  // Always replace previous selection with new one
-  setSelectedDates([
-    {
-      date: dateStr,
-      timeSlot: slots[0],
-      steamWash: false,
-      timeSlots: slots,
-    },
-  ]);
-};
+    // Always replace previous selection with new one
+    setSelectedDates([
+      {
+        date: dateStr,
+        timeSlot: slots[0],
+        steamWash: false,
+        timeSlots: slots,
+      },
+    ]);
+  };
 
   const handleTimeSlotChange = (date: string, timeSlot: string) => {
     setSelectedDates((prev) =>
@@ -150,8 +152,18 @@ const OneTimeSelectDate = ({
   };
 
   const monthNames = [
-    "January", "February", "March", "April", "May", "June",
-    "July", "August", "September", "October", "November", "December",
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
   ];
 
   const handlePrevMonth = () => {
@@ -175,7 +187,9 @@ const OneTimeSelectDate = ({
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="space-y-3">
-        <h4 className="flex items-center justify-center gap-2 text-xl md:text-2xl lg:text-[32px] font-semibold text-black text-center"><Calendar className="text-[#499FC0] w-8 h-8" /> Select a Dates</h4>
+        <h4 className="flex items-center justify-center gap-2 text-xl md:text-2xl lg:text-[32px] font-semibold text-black text-center">
+          <Calendar className="text-[#499FC0] w-8 h-8" /> Select a Dates
+        </h4>
 
         {/* Month & Year Navigation */}
         <div className="flex justify-between items-center mb-2">
@@ -235,25 +249,27 @@ const OneTimeSelectDate = ({
               const isHovered = hoveredDate === dateStr;
 
               return (
-                <div className=" w-full flex items-center justify-center" key={day}>
-                  <button
-                 
-                  onClick={() => handleDateSelect(day)}
-                  onMouseEnter={() => setHoveredDate(dateStr)}
-                  onMouseLeave={() => setHoveredDate(null)}
-                  className={`w-10 h-10 rounded-full flex items-center justify-center text-sm ${
-                    isPast
-                      ? "bg-gray-200 cursor-not-allowed"
-                      : isSelected
-                      ? "bg-[#499FC0] text-white"
-                      : isHovered
-                      ? "bg-blue-100"
-                      : "hover:bg-blue-100"
-                  }`}
-                  disabled={isPast}
+                <div
+                  className=" w-full flex items-center justify-center"
+                  key={day}
                 >
-                  {day}
-                </button>
+                  <button
+                    onClick={() => handleDateSelect(day)}
+                    onMouseEnter={() => setHoveredDate(dateStr)}
+                    onMouseLeave={() => setHoveredDate(null)}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center text-sm ${
+                      isPast
+                        ? "bg-gray-200 cursor-not-allowed"
+                        : isSelected
+                        ? "bg-[#499FC0] text-white"
+                        : isHovered
+                        ? "bg-blue-100"
+                        : "hover:bg-blue-100"
+                    }`}
+                    disabled={isPast}
+                  >
+                    {day}
+                  </button>
                 </div>
               );
             })}
@@ -264,7 +280,10 @@ const OneTimeSelectDate = ({
         {selectedDates.length > 0 && (
           <div className="space-y-3 max-h-[300px] overflow-y-auto">
             {selectedDates.map((dateObj, index) => (
-              <div key={index} className="border border-gray-300 p-2 rounded-md">
+              <div
+                key={index}
+                className="border border-gray-300 p-2 rounded-md"
+              >
                 <p className="text-sm font-medium">
                   Wash #{index + 1} - {dateObj.date}
                 </p>
@@ -299,7 +318,8 @@ const OneTimeSelectDate = ({
                     htmlFor={`steam-wash-${index}`}
                     className="text-sm font-medium text-[#03090D] leading-[120%]"
                   >
-                    Steam Wash
+                    {/* Steam Wash */}
+                    {serviceName}
                   </Label>
                 </div>
               </div>

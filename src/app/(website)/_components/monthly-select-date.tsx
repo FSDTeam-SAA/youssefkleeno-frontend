@@ -36,12 +36,14 @@ interface MonthlyDateSelectionProps {
   onOpenChange: (open: boolean) => void;
   onNext: (selectedDates: SelectedDate[]) => void;
   washtypeId: string | null;
+  serViceName: string | null;
 }
 
 const MonthlySelectDate = ({
   open,
   onOpenChange,
   onNext,
+  serViceName,
 }: MonthlyDateSelectionProps) => {
   const [selectedDates, setSelectedDates] = useState<SelectedDate[]>([]);
   const [hoveredDate, setHoveredDate] = useState<string | null>(null);
@@ -294,7 +296,8 @@ const MonthlySelectDate = ({
                     htmlFor={`steam-wash-${index}`}
                     className="text-sm font-medium text-[#03090D] leading-[120%]"
                   >
-                    Steam Wash
+                    {/* Steam Wash */}
+                    {serViceName}
                   </Label>
                 </div>
               </div>
