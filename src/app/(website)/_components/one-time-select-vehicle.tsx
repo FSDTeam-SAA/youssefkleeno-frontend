@@ -97,13 +97,13 @@ const OneTimeSelectVehicle = ({
                         : "bg-white border border-[#0000001A]"
                     }`}
                   >
-                    <div className="bg-[#0066CC33] p-[15px] rounded-full">
+                    <div className="bg-[#0066CC33] p-3 rounded-full">
                       <Image
                         src={item.vehicleImage.url || "/no-image.png"}
                         alt={item.vehicleName}
                         width={32}
                         height={32}
-                        className="object-cover"
+                        className="w-10 h-10 object-cover"
                       />
                     </div>
                     <h4 className="text-base md:text-lg font-semibold text-[#1F2937]">

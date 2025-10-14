@@ -99,13 +99,13 @@ const MonthlyWashType = ({
                     }`}
                   >
                     <div className={`flex items-center gap-4`}>
-                      <div className="bg-[#0066CC33] p-[15px] rounded-full">
+                      <div className="bg-[#0066CC33] p-3 rounded-full">
                         <Image
                           src={item.serviceImage.url || "/no-image.png"}
                           alt={item.serviceName}
                           width={40}
                           height={40}
-                          className="object-cover rounded-full"
+                          className="w-10 h-10 object-cover rounded-full"
                         />
                       </div>
 
