@@ -78,6 +78,8 @@ const MonthlyService = () => {
   // ✅ Position state lifted up here
   const [position, setPosition] = useState<[number, number]>(defaultPosition);
 
+  console.log("date", selectedDates);
+
   console.log(position);
   const washtypeId = selectedWashType?._id;
   const [bookingId, setBookingId] = useState("");
@@ -293,7 +295,11 @@ const MonthlyService = () => {
             open={monthlyBookingConfirmModalOpen}
             onOpenChange={setMonthlyBookingConfirmModalOpen}
             bookingId={bookingId}
-            bookingDate={selectedDates.length > 0 ? [selectedDates[0]] : [{ date: "", timeSlot: "", steamWash: false, timeSlots: [] }]}
+            bookingDate={
+              selectedDates?.length > 0
+                ? selectedDates 
+                : [{ date: "", timeSlot: "", steamWash: false, timeSlots: [] }] 
+            }
             location={selectedLocation}
             serviceType={selectedWashType?.washType || ""}
           />
